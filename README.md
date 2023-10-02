@@ -8,6 +8,9 @@ and results for developing the Gamifying Code.
 The contract is effective for all team members participating in the Senior Design Capstone class 
 series in the 2023-2024 academic year.
 
+## In-Game Example
+![GameConcept](https://github.com/bracko-3/Gamifying-Code/assets/112514952/98ea6be5-33e6-460e-a602-d4f4fce64796)
+
 # Senior Design Contract 
 ## Project Summary 
 
