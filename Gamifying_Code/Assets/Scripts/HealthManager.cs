@@ -18,6 +18,11 @@ public class HealthManager : MonoBehaviour
     
     public Slider PlayerSlider;
     public Slider EnemySlider;
+
+    private Image PlayerIcon;
+    private Image EnemyIcon;
+
+
     
 
     void Start()
@@ -29,6 +34,11 @@ public class HealthManager : MonoBehaviour
 
         // Find the Slider that Controlls the Enemy Health
         EnemySlider = GameObject.FindGameObjectWithTag("EnemyHealthBar").GetComponent<Slider>();
+
+        // Set up refences to the icons of the healh bars so we can change them later
+        PlayerIcon = GameObject.FindGameObjectWithTag("PlayerIcon").GetComponent<Image>();
+        EnemyIcon = GameObject.FindGameObjectWithTag("EnemyIcon").GetComponent<Image>();
+
 
         //Sets the current health to max health at the start.
         EnemyCurrentHealth = EnemyMaxHealth;
