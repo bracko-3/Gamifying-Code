@@ -7,11 +7,15 @@ public class QuizManager : MonoBehaviour
 {
     public List<QuestionsAndAnswers> QnA;
     public GameObject[] options;
+
+    //current question in the list of questions and the current question selected.
     private int currentQuestionInt;
     private string currentQuestion;
 
+    //What gets shown for the question on the game
     public Text QuestionTxt;
 
+    //For type writing part of quiz
     public float delay = 0.1f;
     private string currentText = "";
     private string questionToTypeWriter;
@@ -33,6 +37,9 @@ public class QuizManager : MonoBehaviour
         {
             options[i].GetComponent<AnswerScript>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestionInt].Answers[i];
+
+            //Resets color when new answers appear.
+            options[i].GetComponent<Image>().color = options[i].GetComponent<AnswerScript>().startColor;
 
             if (QnA[currentQuestionInt].CorrectAnswers == i + 1)
             {
