@@ -28,7 +28,7 @@ public class QuizManager : MonoBehaviour
     public void correct()
     {
         QnA.RemoveAt(currentQuestionInt);
-        generateQuestionAndAnswers();
+        Invoke(nameof(generateQuestionAndAnswers), 2);
     }
 
     void setAnswers()
@@ -37,8 +37,6 @@ public class QuizManager : MonoBehaviour
         {
             options[i].GetComponent<AnswerScript>().isCorrect = false;
             options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestionInt].Answers[i];
-
-            //Resets color when new answers appear.
             options[i].GetComponent<Image>().color = options[i].GetComponent<AnswerScript>().startColor;
 
             if (QnA[currentQuestionInt].CorrectAnswers == i + 1)
