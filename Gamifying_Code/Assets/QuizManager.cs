@@ -7,48 +7,71 @@ public class QuizManager : MonoBehaviour
 {
     public List<QuestionsAndAnswers> QnA;
     public GameObject[] options;
-    public int currentQuestion;
+    private int currentQuestionInt;
+    private string currentQuestion;
 
     public Text QuestionTxt;
 
+    public float delay = 0.1f;
+    private string currentText = "";
+    private string questionToTypeWriter;
+
     private void Start()
     {
-        generateQuestion();
+        generateQuestionAndAnswers();
     }
 
     public void correct()
     {
-        QnA.RemoveAt(currentQuestion);
-        generateQuestion();
+        QnA.RemoveAt(currentQuestionInt);
+        generateQuestionAndAnswers();
     }
 
     void setAnswers()
     {
-        for(int i = 0; i < options.Length; i++)
+        for (int i = 0; i < options.Length; i++)
         {
             options[i].GetComponent<AnswerScript>().isCorrect = false;
-            options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestion].Answers[i];
+            options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestionInt].Answers[i];
 
-            if(QnA[currentQuestion].CorrectAnswers == i + 1)
+            if (QnA[currentQuestionInt].CorrectAnswers == i + 1)
             {
                 options[i].GetComponent<AnswerScript>().isCorrect = true;
             }
         }
     }
 
-    void generateQuestion()
+    public string generateQuestion()
     {
-        
-        if(QnA.Count > 0)
-        {
-            currentQuestion = Random.Range(0, QnA.Count);
+            currentQuestionInt = Random.Range(0, QnA.Count);
 
-            QuestionTxt.text = QnA[currentQuestion].Question;
+            currentQuestion = QnA[currentQuestionInt].Question;
+
+            return currentQuestion;
+    }
+
+    public void generateQuestionAndAnswers()
+    {
+        if (QnA.Count > 0)
+        {
+            questionToTypeWriter = generateQuestion();
+            StartCoroutine(ShowText());
             setAnswers();
+            //Invoke(nameof(setAnswers), 4); use this for waiting to set answers in the future
         }
         else
         {
             Debug.Log("Out of Questions");
+        }
+    }
+
+    IEnumerator ShowText()
+    {
+        for (int i = 0; i <= questionToTypeWriter.Length; i++)
+        {
+            currentText = questionToTypeWriter.Substring(0, i);
+            QuestionTxt.text = currentText;
+            yield return new WaitForSeconds(delay);
         }
     }
 }
