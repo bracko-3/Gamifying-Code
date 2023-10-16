@@ -9,25 +9,28 @@ public class AttackManager : MonoBehaviour
     public float PlayerHAttack = 20;
     private GameObject StateManager;
 
-    public GameObject HealthManger;
+    public GameObject HealthManager;
 
     public void Start()
     {
        StateManager = GameObject.FindGameObjectWithTag("StateManager");
+       HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
     }
 
     public void ApplyLAttack()
     {
-
+        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true; 
     }
     public void ApplyMAttack()
     {
+        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
     }
     public void ApplyHAttack()
     {
+        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
     }
-
+    //GC
 }
