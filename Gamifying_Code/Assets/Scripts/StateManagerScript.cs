@@ -47,11 +47,12 @@ public class StateManagerScript : MonoBehaviour
     {
         if(CorrectAnswerPressed == true)
         {
+            PlayerAttackPressed = false;
             _currentState = GameState.PlayerAttack;
         }
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.EnemyAttack;
+            _currentState = GameState.PlayerQuestion;
         }
 
         switch (_currentState)
@@ -98,6 +99,6 @@ public class StateManagerScript : MonoBehaviour
 
             default:
                 break;
-        }
+        }//Gc
     }
 }

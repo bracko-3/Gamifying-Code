@@ -9,6 +9,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6318030373096875536, guid: 289435e2e6a43da4c8e7a08b0089a4ae, type: 3}
       propertyPath: m_Name
+      value: AttackManager Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318030373096875536, guid: 289435e2e6a43da4c8e7a08b0089a4ae, type: 3}
+      propertyPath: m_TagString
       value: AttackManager
       objectReference: {fileID: 0}
     - target: {fileID: 6318030373096875550, guid: 289435e2e6a43da4c8e7a08b0089a4ae, type: 3}

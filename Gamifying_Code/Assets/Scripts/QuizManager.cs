@@ -7,11 +7,13 @@ public class QuizManager : MonoBehaviour
 {
     public List<QuestionsAndAnswers> QnA;
     public GameObject[] options;
+    public GameObject stateManager;
 
     //current question in the list of questions and the current question selected.
+    [SerializeField]
     private int currentQuestionInt;
     private string currentQuestion;
-
+        
     //What gets shown for the question on the game
     public Text QuestionTxt;
 
@@ -22,13 +24,16 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
+        stateManager = GameObject.FindGameObjectWithTag("StateManager");
         generateQuestionAndAnswers();
     }
 
     public void correct()
     {
         QnA.RemoveAt(currentQuestionInt);
-        Invoke(nameof(generateQuestionAndAnswers), 2);
+        stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
+        Invoke(nameof(generateQuestionAndAnswers), 5);
+        
     }
 
     void setAnswers()
