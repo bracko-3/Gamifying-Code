@@ -8,18 +8,26 @@ public class QuizManager : MonoBehaviour
     public List<QuestionsAndAnswers> QnA;
     public GameObject[] options;
     public int currentQuestion;
+    public bool correctButtonPressed;
+    private GameObject StateManager
+        ;
+
+
 
     public Text QuestionTxt;
 
     private void Start()
     {
         generateQuestion();
+        StateManager = GameObject.FindGameObjectWithTag("StateManager");
+
     }
 
     public void correct()
     {
         QnA.RemoveAt(currentQuestion);
         generateQuestion();
+        correctButtonPressed = true;
     }
 
     void setAnswers()
