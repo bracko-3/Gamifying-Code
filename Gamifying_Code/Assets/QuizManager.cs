@@ -28,6 +28,7 @@ public class QuizManager : MonoBehaviour
         QnA.RemoveAt(currentQuestion);
         generateQuestion();
         correctButtonPressed = true;
+        StateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
     }
 
     void setAnswers()
