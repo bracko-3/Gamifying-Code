@@ -13,12 +13,16 @@ public class QuizManager : MonoBehaviour
     [SerializeField]
     private int currentQuestionInt;
     private string currentQuestion;
-        
+
+    //For answers being written out
+    private string currentAnswerText = "";
+    public float answerDelay = 0.05f;
+
     //What gets shown for the question on the game
     public Text QuestionTxt;
 
     //For type writing part of quiz
-    public float delay = 0.1f;
+    public float questionDelay = 0.1f;
     private string currentText = "";
     private string questionToTypeWriter;
 
@@ -65,12 +69,20 @@ public class QuizManager : MonoBehaviour
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
     }
 
-    public void setAnswers()
+    public IEnumerator setAnswers()
     {
         for (int i = 0; i < options.Length; i++)
         {
             options[i].GetComponent<AnswerScript>().isCorrect = false;
-            options[i].transform.GetChild(0).GetComponent<Text>().text = QnA[currentQuestionInt].Answers[i];
+
+            //Type writter for answers
+            for (int x = 0; x <= QnA[currentQuestionInt].Answers[i].Length; x++)
+            {
+                currentAnswerText = QnA[currentQuestionInt].Answers[i].Substring(0, x);
+                options[i].transform.GetChild(0).GetComponent<Text>().text = currentAnswerText;
+                yield return new WaitForSeconds(answerDelay);
+            }
+
             options[i].GetComponent<Image>().color = options[i].GetComponent<AnswerScript>().startColor;
 
             if (QnA[currentQuestionInt].CorrectAnswers == i + 1)
@@ -104,7 +116,7 @@ public class QuizManager : MonoBehaviour
         if (QnA.Count > 0)
         {
             questionToTypeWriter = generateQuestion();
-            StartCoroutine(ShowText());
+            StartCoroutine(ShowQuestion());
         }
         else
         {
@@ -112,14 +124,14 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    IEnumerator ShowText()
+    IEnumerator ShowQuestion()
     {
         for (int i = 0; i <= questionToTypeWriter.Length; i++)
         {
             currentText = questionToTypeWriter.Substring(0, i);
             QuestionTxt.text = currentText;
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSeconds(questionDelay);
         }
-        setAnswers();
+        StartCoroutine(setAnswers());
     }
 }

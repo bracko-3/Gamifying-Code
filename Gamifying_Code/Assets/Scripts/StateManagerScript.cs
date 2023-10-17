@@ -45,8 +45,8 @@ public class StateManagerScript : MonoBehaviour
 
     public IEnumerator popupDelay()
     {
-        yield return new WaitForSeconds(1);
-        _currentState = GameState.PlayerAttack;
+        yield return new WaitForSeconds(2);
+        AttackPopUp.SetActive(true);
         popupShowing = true;
     }
 
@@ -55,7 +55,7 @@ public class StateManagerScript : MonoBehaviour
     {
         if(CorrectAnswerPressed == true)
         {
-            PlayerAttackPressed = false;
+            _currentState = GameState.PlayerAttack;
             StartCoroutine(popupDelay());
         }
         if(PlayerAttackPressed == true)
@@ -79,7 +79,6 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
-                AttackPopUp.SetActive(true);
                 CorrectAnswerPressed = false;
                 break;
 
