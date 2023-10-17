@@ -22,7 +22,11 @@ public class QuizManager : MonoBehaviour
     private string currentText = "";
     private string questionToTypeWriter;
 
+    //Used for telling if the attack has been pressed, so we can start a new question.
     private bool isAttackPressed;
+
+    //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
+    private bool isPopupShowing;
 
     private void Start()
     {
@@ -32,11 +36,26 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
+        //always checking to see if the attack has been pressed
         isAttackPressed = stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed;
-        if(isAttackPressed == true)
+
+        //always checking to see if the popup is showing, to remove the questions and answers at the same time.
+        isPopupShowing = stateManager.GetComponent<StateManagerScript>().popupShowing;
+        
+
+        //if it has been pressed, type 1 question,. then turn it back to false so it doesnt go through all the questions.
+        if (isAttackPressed == true)
         {
             typeQuestion();
             stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
+        }
+
+        //if popup shows up, make the question and answers go away
+        if (isPopupShowing == true)
+        {
+            //Reset the question and answers to blank while waiting for next question to type out all the way.
+            resetQuestionAndAnswers();
+            stateManager.GetComponent<StateManagerScript>().popupShowing = false;
         }
     }
 
@@ -44,12 +63,9 @@ public class QuizManager : MonoBehaviour
     {
         QnA.RemoveAt(currentQuestionInt);
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
-
-        //Reset Answers to blank, waiting for next question to type out all the way.
-        resetQuestionAndAnswers();
     }
 
-    void setAnswers()
+    public void setAnswers()
     {
         for (int i = 0; i < options.Length; i++)
         {
@@ -64,7 +80,7 @@ public class QuizManager : MonoBehaviour
         }
     }
 
-    void resetQuestionAndAnswers()
+    public void resetQuestionAndAnswers()
     {
         QuestionTxt.text = "";
         for (int i = 0; i < options.Length; i++)

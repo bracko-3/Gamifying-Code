@@ -29,6 +29,7 @@ public class StateManagerScript : MonoBehaviour
 
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
+    public bool popupShowing = false;
 
 
 
@@ -42,13 +43,20 @@ public class StateManagerScript : MonoBehaviour
         
     }
 
+    public IEnumerator popupDelay()
+    {
+        yield return new WaitForSeconds(1);
+        _currentState = GameState.PlayerAttack;
+        popupShowing = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if(CorrectAnswerPressed == true)
         {
             PlayerAttackPressed = false;
-            _currentState = GameState.PlayerAttack;
+            StartCoroutine(popupDelay());
         }
         if(PlayerAttackPressed == true)
         {
