@@ -22,10 +22,22 @@ public class QuizManager : MonoBehaviour
     private string currentText = "";
     private string questionToTypeWriter;
 
+    private bool isAttackPressed;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
-        generateQuestionAndAnswers();
+        typeQuestion();
+    }
+
+    private void Update()
+    {
+        isAttackPressed = stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed;
+        if(isAttackPressed == true)
+        {
+            typeQuestion();
+            stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
+        }
     }
 
     public void correct()
@@ -33,8 +45,8 @@ public class QuizManager : MonoBehaviour
         QnA.RemoveAt(currentQuestionInt);
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
 
-        Invoke(nameof(generateQuestionAndAnswers), 5);
-        
+        //Reset Answers to blank, waiting for next question to type out all the way.
+        resetQuestionAndAnswers();
     }
 
     void setAnswers()
@@ -52,6 +64,16 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    void resetQuestionAndAnswers()
+    {
+        QuestionTxt.text = "";
+        for (int i = 0; i < options.Length; i++)
+        {
+            options[i].transform.GetChild(0).GetComponent<Text>().text = " ";
+            options[i].GetComponent<Image>().color = options[i].GetComponent<AnswerScript>().startColor;
+        }
+    }
+
     public string generateQuestion()
     {
             currentQuestionInt = Random.Range(0, QnA.Count);
@@ -61,13 +83,12 @@ public class QuizManager : MonoBehaviour
             return currentQuestion;
     }
 
-    public void generateQuestionAndAnswers()
+    public void typeQuestion()
     {
         if (QnA.Count > 0)
         {
             questionToTypeWriter = generateQuestion();
             StartCoroutine(ShowText());
-            //Invoke(nameof(setAnswers), 4); use this for waiting to set answers in the future
         }
         else
         {

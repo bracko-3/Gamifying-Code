@@ -58,18 +58,15 @@ public class StateManagerScript : MonoBehaviour
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-                Debug.Log("Player choose an Answer");
                 foreach(GameObject Answerbutton in AnswerBtns)
                 {
                     Answerbutton.GetComponent<Button>().interactable = true;
                 }
-               
-                AttackPopUp.SetActive(false);
 
+                AttackPopUp.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
-                Debug.Log("Player choose an attack");
                 foreach (GameObject Answerbutton in AnswerBtns)
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
