@@ -32,6 +32,7 @@ public class QuizManager : MonoBehaviour
     {
         QnA.RemoveAt(currentQuestionInt);
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
+
         Invoke(nameof(generateQuestionAndAnswers), 5);
         
     }
@@ -66,7 +67,6 @@ public class QuizManager : MonoBehaviour
         {
             questionToTypeWriter = generateQuestion();
             StartCoroutine(ShowText());
-            setAnswers();
             //Invoke(nameof(setAnswers), 4); use this for waiting to set answers in the future
         }
         else
@@ -83,5 +83,6 @@ public class QuizManager : MonoBehaviour
             QuestionTxt.text = currentText;
             yield return new WaitForSeconds(delay);
         }
+        setAnswers();
     }
 }
