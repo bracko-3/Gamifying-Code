@@ -32,6 +32,9 @@ public class QuizManager : MonoBehaviour
     //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
     private bool isPopupShowing;
 
+    //To show what question you're on
+    private int questionNumber = 0;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
@@ -90,6 +93,12 @@ public class QuizManager : MonoBehaviour
                 options[i].GetComponent<AnswerScript>().isCorrect = true;
             }
         }
+
+        //Makes buttons clickable after they have all typed out. They are set to false everytime you get the answer correct.
+        foreach (GameObject option in options)
+        {
+            option.GetComponent<Button>().interactable = true;
+        }
     }
 
     public void resetQuestionAndAnswers()
@@ -115,6 +124,8 @@ public class QuizManager : MonoBehaviour
     {
         if (QnA.Count > 0)
         {
+            questionNumber += 1;
+            Debug.Log("Question number " + questionNumber);
             questionToTypeWriter = generateQuestion();
             StartCoroutine(ShowQuestion());
         }

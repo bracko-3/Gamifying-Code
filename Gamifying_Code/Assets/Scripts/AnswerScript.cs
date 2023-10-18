@@ -27,6 +27,7 @@ public class AnswerScript : MonoBehaviour
         else
         {
             GetComponent<Image>().color = Color.red;
+            GetComponent<Button>().interactable = false;
             Debug.Log("Wrong Answer");
         }
     }

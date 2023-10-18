@@ -66,10 +66,6 @@ public class StateManagerScript : MonoBehaviour
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-                foreach(GameObject Answerbutton in AnswerBtns)
-                {
-                    Answerbutton.GetComponent<Button>().interactable = true;
-                }
 
                 AttackPopUp.SetActive(false);
                 break;
