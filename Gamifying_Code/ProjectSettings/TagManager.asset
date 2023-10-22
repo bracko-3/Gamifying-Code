@@ -3,7 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Answer Button
+  - QuizManager
+  - StateManager
+  - Attackpopup
+  - QuizManger
+  - HealthManager
+  - AttackManager
+  - PlayerHealthBar
+  - Undefined
+  - EnemyHealthBar
+  - EnemyIcon
+  - PlayerIcon
   layers:
   - Default
   - TransparentFX
@@ -42,8 +54,5 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: New Layer 1
-    uniqueID: 3449204719
-    locked: 0
-  - name: New Layer 2
-    uniqueID: 2286847857
+    uniqueID: 117270355
     locked: 0
