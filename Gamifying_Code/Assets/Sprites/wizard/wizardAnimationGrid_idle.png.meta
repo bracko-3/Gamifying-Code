@@ -120,9 +120,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 668
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68ba4f33056da1c4aae84f2032650101
-      internalID: 995899295
+      spriteID: 2a7e99a6825a5fc4baa029ccdf628af9
+      internalID: 793557552
       vertices: []
       indices: 
       edges: []
@@ -141,9 +141,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 256
-        y: 668
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e49f4fe3411e7e94a84b8eadace13290
-      internalID: -658578182
+      spriteID: 18af8a6db6de33044997f958e066ef71
+      internalID: 215119484
       vertices: []
       indices: 
       edges: []
@@ -162,9 +162,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 512
-        y: 669
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2a0af13e30ae4e418ab4f6a89d31871
-      internalID: 975613485
+      spriteID: 35e650853decc1f4b835876b89da5fb7
+      internalID: -697296117
       vertices: []
       indices: 
       edges: []
@@ -183,9 +183,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 768
-        y: 668
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4ad3ad68e9fc3c547a390d5949d3a740
-      internalID: 208085173
+      spriteID: ce815693b83ab974182054e66b575a29
+      internalID: -797428172
       vertices: []
       indices: 
       edges: []
@@ -204,9 +204,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1024
-        y: 669
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,8 +214,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 997dc0d29d3a6ed4b80b66ca03d6fcf6
-      internalID: -856395125
+      spriteID: 572ebddcf0686da458db511ca3d33428
+      internalID: -1153549251
       vertices: []
       indices: 
       edges: []
@@ -225,9 +225,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1280
-        y: 668
+        y: 512
         width: 256
-        height: 256
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,8 +235,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23feeafb821bc8b4ab59d2f5cb97fc82
-      internalID: -826571204
+      spriteID: 143048bb192c11c40b2b936c24b119d5
+      internalID: -1408502994
       vertices: []
       indices: 
       edges: []
@@ -252,12 +252,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      wizardAnimationGrid_idle_2: 975613485
-      wizardAnimationGrid_idle_3: 208085173
-      wizardAnimationGrid_idle_4: -856395125
-      wizardAnimationGrid_idle_1: -658578182
-      wizardAnimationGrid_idle_0: 995899295
-      wizardAnimationGrid_idle_5: -826571204
+      wizardAnimationGrid_idle_2: -697296117
+      wizardAnimationGrid_idle_3: -797428172
+      wizardAnimationGrid_idle_4: -1153549251
+      wizardAnimationGrid_idle_1: 215119484
+      wizardAnimationGrid_idle_0: 793557552
+      wizardAnimationGrid_idle_5: -1408502994
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
