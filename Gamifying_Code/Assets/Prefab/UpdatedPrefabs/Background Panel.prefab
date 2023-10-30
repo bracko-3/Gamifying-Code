@@ -412,6 +412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4419989888650113177
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4419989889258305447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,6 +1437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4419989889658373549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1691,6 +1694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCorrect: 0
   quizManager: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &4419989889844996671
 GameObject:
   m_ObjectHideFlags: 0
