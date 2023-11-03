@@ -22,7 +22,8 @@ public class StateManagerScript : MonoBehaviour
     private GameObject AttackPopUp;
 
     public GameObject[] AnswerBtns;
-  
+    public GameObject[] AttackBtns;
+
 
     [SerializeField]
     private GameState _currentState;
@@ -39,8 +40,7 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
-        AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
-        
+        AttackBtns = GameObject.FindGameObjectsWithTag("Attack Button");
     }
 
     public IEnumerator popupDelay()
