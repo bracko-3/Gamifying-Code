@@ -39,7 +39,7 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
-        //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
+        AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
         
     }
 
