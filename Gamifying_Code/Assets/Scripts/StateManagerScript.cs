@@ -17,7 +17,12 @@ public class StateManagerScript : MonoBehaviour
 
     }
     private GameObject QuestionsUI;
+    [SerializeField]
     private GameObject quizManager;
+    [SerializeField]
+    private GameObject HealthManager;
+    [SerializeField]
+    private GameObject AttackManager;
     [SerializeField]
     private GameObject AttackPopUp;
 
@@ -33,12 +38,18 @@ public class StateManagerScript : MonoBehaviour
 
 
 
+
+
+
+
     // Start is called before the first frame update
     void Start()
     { 
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
+        HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+        AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
         //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
         
     }
@@ -60,7 +71,7 @@ public class StateManagerScript : MonoBehaviour
         }
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.PlayerQuestion;
+            _currentState = GameState.EnemyAttack;
         }
 
         switch (_currentState)
@@ -82,6 +93,8 @@ public class StateManagerScript : MonoBehaviour
                 Debug.Log("EnemyTurnTo attack");
                 PlayerAttackPressed = false;
                 AttackPopUp.SetActive(false);
+                HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
+                _currentState = GameState.PlayerQuestion;
                 break;
 
             case GameState.NextEnemy:
