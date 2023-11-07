@@ -7,6 +7,8 @@ public class AttackManager : MonoBehaviour
     public float PlayerLAttack = 10;
     public float PlayerMAttack = 15;
     public float PlayerHAttack = 20;
+
+    public float EnemyAttack = 10;
     private GameObject StateManager;
 
     public GameObject HealthManager;

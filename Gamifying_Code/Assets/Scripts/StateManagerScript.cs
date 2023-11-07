@@ -31,6 +31,9 @@ public class StateManagerScript : MonoBehaviour
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
 
+    public GameObject AttackManager;
+    public GameObject HealthManager;
+
 
 
     // Start is called before the first frame update
@@ -39,8 +42,10 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
+        AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
+        HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
         //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
-        
+
     }
 
     public IEnumerator popupDelay()
@@ -60,7 +65,7 @@ public class StateManagerScript : MonoBehaviour
         }
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.PlayerQuestion;
+            _currentState = GameState.EnemyAttack;
         }
 
         switch (_currentState)
@@ -82,6 +87,9 @@ public class StateManagerScript : MonoBehaviour
                 Debug.Log("EnemyTurnTo attack");
                 PlayerAttackPressed = false;
                 AttackPopUp.SetActive(false);
+
+               
+                
                 break;
 
             case GameState.NextEnemy:
@@ -90,7 +98,7 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
-
+                HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
                 break;
 
             case GameState.PlayerDeath:
