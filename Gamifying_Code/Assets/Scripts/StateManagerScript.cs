@@ -17,7 +17,12 @@ public class StateManagerScript : MonoBehaviour
 
     }
     private GameObject QuestionsUI;
+    [SerializeField]
     private GameObject quizManager;
+    [SerializeField]
+    private GameObject HealthManager;
+    [SerializeField]
+    private GameObject AttackManager;
     [SerializeField]
     private GameObject AttackPopUp;
 
@@ -31,8 +36,9 @@ public class StateManagerScript : MonoBehaviour
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
 
-    public GameObject AttackManager;
-    public GameObject HealthManager;
+
+
+
 
 
 
@@ -42,10 +48,10 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
-        AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+        AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
         //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
-
+        
     }
 
     public IEnumerator popupDelay()
@@ -87,9 +93,8 @@ public class StateManagerScript : MonoBehaviour
                 Debug.Log("EnemyTurnTo attack");
                 PlayerAttackPressed = false;
                 AttackPopUp.SetActive(false);
-
-               
-                
+                HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
+                _currentState = GameState.PlayerQuestion;
                 break;
 
             case GameState.NextEnemy:
@@ -98,7 +103,7 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
-                HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
+
                 break;
 
             case GameState.PlayerDeath:
