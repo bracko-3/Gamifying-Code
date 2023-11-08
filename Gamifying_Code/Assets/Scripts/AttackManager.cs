@@ -10,6 +10,7 @@ public class AttackManager : MonoBehaviour
     private GameObject StateManager;
 
     public GameObject HealthManager;
+    public GameObject[] attackOptions;
 
     public void Start()
     {

@@ -24,7 +24,6 @@ public class StateManagerScript : MonoBehaviour
     public GameObject[] AnswerBtns;
     public GameObject[] AttackBtns;
 
-
     [SerializeField]
     private GameState _currentState;
 
@@ -40,7 +39,6 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
-        AttackBtns = GameObject.FindGameObjectsWithTag("Attack Button");
     }
 
     public IEnumerator popupDelay()
@@ -66,7 +64,10 @@ public class StateManagerScript : MonoBehaviour
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-
+                foreach (GameObject AttackButton in AttackBtns)
+                {
+                    AttackButton.GetComponent<Button>().interactable = false;
+                }
                 AttackPopUp.SetActive(false);
                 break;
 
@@ -74,6 +75,10 @@ public class StateManagerScript : MonoBehaviour
                 foreach (GameObject Answerbutton in AnswerBtns)
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
+                }
+                foreach (GameObject AttackButton in AttackBtns)
+                {
+                    AttackButton.GetComponent<Button>().interactable = true;
                 }
                 CorrectAnswerPressed = false;
                 break;
