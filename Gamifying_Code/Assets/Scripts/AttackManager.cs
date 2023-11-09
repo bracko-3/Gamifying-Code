@@ -14,7 +14,7 @@ public class AttackManager : MonoBehaviour
     public void Start()
     {
        StateManager = GameObject.FindGameObjectWithTag("StateManager");
-       HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+    
     }
 
     public void ApplyLAttack()
