@@ -31,8 +31,6 @@ public class StateManagerScript : MonoBehaviour
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
 
-
-
     // Start is called before the first frame update
     void Start()
     { 
@@ -59,6 +57,8 @@ public class StateManagerScript : MonoBehaviour
         if(PlayerAttackPressed == true)
         {
             _currentState = GameState.PlayerQuestion;
+            AttackPopUp.SetActive(false);
+            popupShowing = false;
         }
 
         switch (_currentState)
@@ -68,7 +68,6 @@ public class StateManagerScript : MonoBehaviour
                 {
                     AttackButton.GetComponent<Button>().interactable = false;
                 }
-                AttackPopUp.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
@@ -86,7 +85,6 @@ public class StateManagerScript : MonoBehaviour
             case GameState.EnemyAttack:
                 Debug.Log("EnemyTurnTo attack");
                 PlayerAttackPressed = false;
-                AttackPopUp.SetActive(false);
                 break;
 
             case GameState.NextEnemy:

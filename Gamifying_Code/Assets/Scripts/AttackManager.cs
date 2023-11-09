@@ -17,20 +17,27 @@ public class AttackManager : MonoBehaviour
     
     }
 
+    void delayAttackPressed()
+    {
+        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+    }
+
     public void ApplyLAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
-        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true; 
+        Invoke("delayAttackPressed", 3.0f);
     }
+
     public void ApplyMAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
-        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        Invoke("delayAttackPressed", 3.0f);
     }
+
     public void ApplyHAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
-        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        Invoke("delayAttackPressed", 3.0f);
     }
     //GC
 }
