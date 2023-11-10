@@ -22,16 +22,15 @@ public class StateManagerScript : MonoBehaviour
     private GameObject AttackPopUp;
 
     public GameObject[] AnswerBtns;
-  
+    public GameObject[] AttackBtns;
 
     [SerializeField]
     private GameState _currentState;
 
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
+    public bool startQuestion = false;
     public bool popupShowing = false;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +38,6 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
-        //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
-        
     }
 
     public IEnumerator popupDelay()
@@ -50,24 +47,59 @@ public class StateManagerScript : MonoBehaviour
         popupShowing = true;
     }
 
+    void delayAttackPressed()
+    {
+        _currentState = GameState.PlayerQuestion;
+        AttackPopUp.SetActive(false);
+        popupShowing = false;
+        startQuestion = true;
+    }
+
+    void attackButtonsDisabled()
+    {
+        // Disable the interactability of attack buttons and set the flag to true
+        foreach (GameObject AttackButton in AttackBtns)
+        {
+            Button attackButton = AttackButton.GetComponent<Button>();
+            attackButton.interactable = false;
+        }
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
         if(CorrectAnswerPressed == true)
         {
             _currentState = GameState.PlayerAttack;
+
+            foreach (GameObject AttackButton in AttackBtns)
+            {
+                AttackButton.GetComponent<Button>().interactable = true;
+            }
+
             StartCoroutine(popupDelay());
         }
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.PlayerQuestion;
+            PlayerAttackPressed = false;
+
+            foreach (GameObject AttackButton in AttackBtns)
+            {
+                AttackButton.GetComponent<Button>().interactable = false;
+            }
+
+            Invoke("delayAttackPressed", 2.0f);
         }
 
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-
-                AttackPopUp.SetActive(false);
+                foreach (GameObject AttackButton in AttackBtns)
+                {
+                    AttackButton.GetComponent<Button>().interactable = false;
+                }
                 break;
 
             case GameState.PlayerAttack:
@@ -75,13 +107,13 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
+
                 CorrectAnswerPressed = false;
                 break;
 
             case GameState.EnemyAttack:
                 Debug.Log("EnemyTurnTo attack");
                 PlayerAttackPressed = false;
-                AttackPopUp.SetActive(false);
                 break;
 
             case GameState.NextEnemy:

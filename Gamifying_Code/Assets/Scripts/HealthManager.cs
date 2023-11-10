@@ -53,23 +53,16 @@ public class HealthManager : MonoBehaviour
         //Update the health every frame(might change this later)
         EnemySlider.value = EnemyCurrentHealth;
         PlayerSlider.value = PlayerCurrentHealth;
-
-
-
     }
 
     //Call this Function to do damage to the Enemy
     public void DamageEnemy(float DamageAmount)
     {
         EnemyCurrentHealth -= DamageAmount;
-        
-
     }
     //Call this Function to do damage to the player.
     public void PlayerEnemy(float DamageAmount)
     {
         PlayerCurrentHealth -= DamageAmount;
-
-
     }
 }
