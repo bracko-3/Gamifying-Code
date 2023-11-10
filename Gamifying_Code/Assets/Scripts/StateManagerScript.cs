@@ -55,17 +55,41 @@ public class StateManagerScript : MonoBehaviour
         startQuestion = true;
     }
 
+    void attackButtonsDisabled()
+    {
+        // Disable the interactability of attack buttons and set the flag to true
+        foreach (GameObject AttackButton in AttackBtns)
+        {
+            Button attackButton = AttackButton.GetComponent<Button>();
+            attackButton.interactable = false;
+        }
+    }
+
+
+
     // Update is called once per frame
     void Update()
     {
         if(CorrectAnswerPressed == true)
         {
             _currentState = GameState.PlayerAttack;
+
+            foreach (GameObject AttackButton in AttackBtns)
+            {
+                AttackButton.GetComponent<Button>().interactable = true;
+            }
+
             StartCoroutine(popupDelay());
         }
         if(PlayerAttackPressed == true)
         {
             PlayerAttackPressed = false;
+
+            foreach (GameObject AttackButton in AttackBtns)
+            {
+                AttackButton.GetComponent<Button>().interactable = false;
+            }
+
             Invoke("delayAttackPressed", 2.0f);
         }
 
@@ -83,10 +107,7 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
-                foreach (GameObject AttackButton in AttackBtns)
-                {
-                    AttackButton.GetComponent<Button>().interactable = true;
-                }
+
                 CorrectAnswerPressed = false;
                 break;
 
