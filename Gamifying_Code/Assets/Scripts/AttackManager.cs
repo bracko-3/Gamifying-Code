@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttackManager : MonoBehaviour
 {
@@ -13,31 +14,26 @@ public class AttackManager : MonoBehaviour
 
     public void Start()
     {
-       StateManager = GameObject.FindGameObjectWithTag("StateManager");
-    
-    }
-
-    void delayAttackPressed()
-    {
-        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        StateManager = GameObject.FindGameObjectWithTag("StateManager");
     }
 
     public void ApplyLAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
-        Invoke("delayAttackPressed", 3.0f);
+        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+
     }
 
     public void ApplyMAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
-        Invoke("delayAttackPressed", 3.0f);
+        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
     }
 
     public void ApplyHAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
-        Invoke("delayAttackPressed", 3.0f);
+        StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
     }
     //GC
 }

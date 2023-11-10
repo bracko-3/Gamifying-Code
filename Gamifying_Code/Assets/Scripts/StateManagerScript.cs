@@ -29,6 +29,7 @@ public class StateManagerScript : MonoBehaviour
 
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
+    public bool startQuestion = false;
     public bool popupShowing = false;
 
     // Start is called before the first frame update
@@ -46,6 +47,14 @@ public class StateManagerScript : MonoBehaviour
         popupShowing = true;
     }
 
+    void delayAttackPressed()
+    {
+        _currentState = GameState.PlayerQuestion;
+        AttackPopUp.SetActive(false);
+        popupShowing = false;
+        startQuestion = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -56,9 +65,8 @@ public class StateManagerScript : MonoBehaviour
         }
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.PlayerQuestion;
-            AttackPopUp.SetActive(false);
-            popupShowing = false;
+            PlayerAttackPressed = false;
+            Invoke("delayAttackPressed", 2.0f);
         }
 
         switch (_currentState)

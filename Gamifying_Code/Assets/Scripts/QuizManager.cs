@@ -44,7 +44,7 @@ public class QuizManager : MonoBehaviour
     private void Update()
     {
         //always checking to see if the attack has been pressed
-        isAttackPressed = stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed;
+        isAttackPressed = stateManager.GetComponent<StateManagerScript>().startQuestion;
 
         //always checking to see if the popup is showing, to remove the questions and answers at the same time.
         isPopupShowing = stateManager.GetComponent<StateManagerScript>().popupShowing;
@@ -54,7 +54,8 @@ public class QuizManager : MonoBehaviour
         if (isAttackPressed == true)
         {
             typeQuestion();
-            stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
+            stateManager.GetComponent<StateManagerScript>().startQuestion = false;
+            isAttackPressed = false;
         }
 
         //if popup shows up, make the question and answers go away
