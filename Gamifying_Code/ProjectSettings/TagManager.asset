@@ -14,6 +14,9 @@ TagManager:
   - PlayerHealthBar
   - Undefined
   - EnemyHealthBar
+  - PlayerIcon
+  - EnemyIcon
+  - EndGamePopup
   layers:
   - Default
   - TransparentFX

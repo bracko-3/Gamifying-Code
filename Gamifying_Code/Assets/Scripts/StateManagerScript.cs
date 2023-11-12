@@ -22,7 +22,7 @@ public class StateManagerScript : MonoBehaviour
     private GameObject AttackPopUp;
 
     public GameObject[] AnswerBtns;
-  
+    public GameObject EndGamePopup; 
 
     [SerializeField]
     private GameState _currentState;
@@ -30,6 +30,7 @@ public class StateManagerScript : MonoBehaviour
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
+    public bool playerdeath = false;
 
 
 
@@ -40,6 +41,7 @@ public class StateManagerScript : MonoBehaviour
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
         //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
+        EndGamePopup = GameObject.FindGameObjectWithTag("EndGamePopup");
         
     }
 
@@ -52,7 +54,9 @@ public class StateManagerScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   if (playerdeath == true ){
+        _currentState = GameState.PlayerDeath;
+    }
         if(CorrectAnswerPressed == true)
         {
             _currentState = GameState.PlayerAttack;
@@ -68,6 +72,7 @@ public class StateManagerScript : MonoBehaviour
             case GameState.PlayerQuestion:
 
                 AttackPopUp.SetActive(false);
+                EndGamePopup.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
@@ -95,6 +100,7 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.PlayerDeath:
                 Debug.Log("PlayeDied");
+                EndGamePopup.SetActive(true);
                 break;
 
             default:
