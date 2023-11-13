@@ -35,6 +35,7 @@ public class StateManagerScript : MonoBehaviour
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
+    public GameObject EndGamePopup;
 
 
 
@@ -73,13 +74,17 @@ public class StateManagerScript : MonoBehaviour
         {
             _currentState = GameState.EnemyAttack;
         }
-
+        if(HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth <= 0)
+        {
+            _currentState = GameState.PlayerDeath;
+        }
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
 
                 AttackPopUp.SetActive(false);
                 PlayerAttackPressed = false;
+                EndGamePopup.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
@@ -110,6 +115,7 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.PlayerDeath:
                 Debug.Log("PlayeDied");
+                EndGamePopup.SetActive(true);
                 break;
 
             default:
