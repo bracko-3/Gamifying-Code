@@ -53,6 +53,7 @@ public class QuizManager : MonoBehaviour
         //if it has been pressed, type 1 question,. then turn it back to false so it doesnt go through all the questions.
         if (isAttackPressed == true)
         {
+            Debug.Log("True!!");
             typeQuestion();
             stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
         }

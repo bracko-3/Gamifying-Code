@@ -79,6 +79,7 @@ public class StateManagerScript : MonoBehaviour
             case GameState.PlayerQuestion:
 
                 AttackPopUp.SetActive(false);
+                PlayerAttackPressed = false;
                 break;
 
             case GameState.PlayerAttack:
@@ -95,7 +96,7 @@ public class StateManagerScript : MonoBehaviour
                 AttackPopUp.SetActive(false);
                 HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
                 _currentState = GameState.PlayerQuestion;
-                PlayerAttackPressed = false;
+                
                 break;
 
             case GameState.NextEnemy:
