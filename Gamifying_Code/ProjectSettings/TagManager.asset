@@ -16,6 +16,7 @@ TagManager:
   - EnemyHealthBar
   - EnemyIcon
   - PlayerIcon
+  - AttackPopUp
   layers:
   - Default
   - TransparentFX
