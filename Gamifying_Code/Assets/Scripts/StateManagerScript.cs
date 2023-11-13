@@ -17,20 +17,31 @@ public class StateManagerScript : MonoBehaviour
 
     }
     private GameObject QuestionsUI;
+    [SerializeField]
     private GameObject quizManager;
+    [SerializeField]
+    private GameObject HealthManager;
+    [SerializeField]
+    private GameObject AttackManager;
     [SerializeField]
     private GameObject AttackPopUp;
 
     public GameObject[] AnswerBtns;
-    public GameObject[] AttackBtns;
+  
 
     [SerializeField]
     private GameState _currentState;
 
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
-    public bool startQuestion = false;
     public bool popupShowing = false;
+    public GameObject EndGamePopup;
+
+
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +49,10 @@ public class StateManagerScript : MonoBehaviour
         _currentState = GameState.PlayerQuestion;
         quizManager = GameObject.FindGameObjectWithTag("QuizManager");
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
+        HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+        AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
+        AttackPopUp = GameObject.FindGameObjectWithTag("AttackPopUp");
+        
     }
 
     public IEnumerator popupDelay()
@@ -47,59 +62,29 @@ public class StateManagerScript : MonoBehaviour
         popupShowing = true;
     }
 
-    void delayAttackPressed()
-    {
-        _currentState = GameState.PlayerQuestion;
-        AttackPopUp.SetActive(false);
-        popupShowing = false;
-        startQuestion = true;
-    }
-
-    void attackButtonsDisabled()
-    {
-        // Disable the interactability of attack buttons and set the flag to true
-        foreach (GameObject AttackButton in AttackBtns)
-        {
-            Button attackButton = AttackButton.GetComponent<Button>();
-            attackButton.interactable = false;
-        }
-    }
-
-
-
     // Update is called once per frame
     void Update()
     {
         if(CorrectAnswerPressed == true)
         {
             _currentState = GameState.PlayerAttack;
-
-            foreach (GameObject AttackButton in AttackBtns)
-            {
-                AttackButton.GetComponent<Button>().interactable = true;
-            }
-
             StartCoroutine(popupDelay());
         }
         if(PlayerAttackPressed == true)
         {
-            PlayerAttackPressed = false;
-
-            foreach (GameObject AttackButton in AttackBtns)
-            {
-                AttackButton.GetComponent<Button>().interactable = false;
-            }
-
-            Invoke("delayAttackPressed", 2.0f);
+            _currentState = GameState.EnemyAttack;
         }
-
+        if(HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth <= 0)
+        {
+            _currentState = GameState.PlayerDeath;
+        }
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-                foreach (GameObject AttackButton in AttackBtns)
-                {
-                    AttackButton.GetComponent<Button>().interactable = false;
-                }
+
+                AttackPopUp.SetActive(false);
+                PlayerAttackPressed = false;
+                EndGamePopup.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
@@ -107,13 +92,16 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
-
                 CorrectAnswerPressed = false;
                 break;
 
             case GameState.EnemyAttack:
                 Debug.Log("EnemyTurnTo attack");
-                PlayerAttackPressed = false;
+                
+                AttackPopUp.SetActive(false);
+                HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
+                _currentState = GameState.PlayerQuestion;
+                
                 break;
 
             case GameState.NextEnemy:
@@ -127,6 +115,7 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.PlayerDeath:
                 Debug.Log("PlayeDied");
+                EndGamePopup.SetActive(true);
                 break;
 
             default:
