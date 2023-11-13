@@ -91,10 +91,11 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.EnemyAttack:
                 Debug.Log("EnemyTurnTo attack");
-                PlayerAttackPressed = false;
+                
                 AttackPopUp.SetActive(false);
                 HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
                 _currentState = GameState.PlayerQuestion;
+                PlayerAttackPressed = false;
                 break;
 
             case GameState.NextEnemy:

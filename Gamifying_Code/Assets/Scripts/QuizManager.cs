@@ -103,6 +103,7 @@ public class QuizManager : MonoBehaviour
 
     public void resetQuestionAndAnswers()
     {
+        Debug.Log("reseting");
         QuestionTxt.text = "";
         for (int i = 0; i < options.Length; i++)
         {
