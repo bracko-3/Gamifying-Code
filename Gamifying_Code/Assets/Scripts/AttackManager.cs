@@ -12,16 +12,20 @@ public class AttackManager : MonoBehaviour
     public GameObject StateManager;
 
     public GameObject HealthManager;
+    public GameObject Player;
 
     public void Start()
     {
         StateManager = GameObject.FindGameObjectWithTag("StateManager");
+        HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+        Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public void ApplyLAttack()
+    public void ApplyLAttack()  
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        Player.GetComponent<Animator>().SetTrigger("LightAttack");
 
     }
 
@@ -29,12 +33,14 @@ public class AttackManager : MonoBehaviour
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        Player.GetComponent<Animator>().SetTrigger("MediumAttack");
     }
 
     public void ApplyHAttack()
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
     }
     //GC
 }

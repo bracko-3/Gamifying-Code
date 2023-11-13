@@ -65,4 +65,8 @@ public class HealthManager : MonoBehaviour
     {
         PlayerCurrentHealth -= DamageAmount;
     }
+    public void killPlayer()
+    {
+        PlayerCurrentHealth = -5;
+    }
 }
