@@ -50,7 +50,7 @@ public class StateManagerScript : MonoBehaviour
         AnswerBtns = GameObject.FindGameObjectsWithTag("Answer Button");
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
         AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
-        //AttackPopUp = GameObject.FindGameObjectWithTag("Attackpopup");
+        AttackPopUp = GameObject.FindGameObjectWithTag("AttackPopUp");
         
     }
 
