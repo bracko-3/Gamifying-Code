@@ -35,13 +35,6 @@ public class StateManagerScript : MonoBehaviour
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
-    public GameObject EndGamePopup;
-
-
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +45,6 @@ public class StateManagerScript : MonoBehaviour
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
         AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
         AttackPopUp = GameObject.FindGameObjectWithTag("AttackPopUp");
-        
     }
 
     public IEnumerator popupDelay()
@@ -84,7 +76,6 @@ public class StateManagerScript : MonoBehaviour
 
                 AttackPopUp.SetActive(false);
                 PlayerAttackPressed = false;
-                EndGamePopup.SetActive(false);
                 break;
 
             case GameState.PlayerAttack:
@@ -115,7 +106,6 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.PlayerDeath:
                 Debug.Log("PlayeDied");
-                EndGamePopup.SetActive(true);
                 break;
 
             default:
