@@ -135,7 +135,12 @@ public class QuizManager : MonoBehaviour
         else
         {
             Debug.Log("Out of Questions");
+            endGame();
         }
+    }
+
+    public void endGame() {
+        stateManager.GetComponent<StateManagerScript>().endScreen = true;
     }
 
     IEnumerator ShowQuestion()

@@ -14,7 +14,7 @@ public class StateManagerScript : MonoBehaviour
         EnemyAttack,
         NextEnemy,
         PlayerDeath,
-
+        EndGame
     }
     private GameObject QuestionsUI;
     [SerializeField]
@@ -27,7 +27,13 @@ public class StateManagerScript : MonoBehaviour
     private GameObject AttackPopUp;
 
     public GameObject[] AnswerBtns;
-  
+
+    private GameObject PlayerHealthBar;
+    private GameObject EnemyHealthBar;
+    private GameObject PlayerModel;
+    private GameObject EnemyModel;
+    private GameObject QuestionUI;
+
 
     [SerializeField]
     private GameState _currentState;
@@ -35,6 +41,7 @@ public class StateManagerScript : MonoBehaviour
     public bool CorrectAnswerPressed;
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
+    public bool endScreen = false;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +52,13 @@ public class StateManagerScript : MonoBehaviour
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
         AttackManager = GameObject.FindGameObjectWithTag("AttackManager");
         AttackPopUp = GameObject.FindGameObjectWithTag("AttackPopUp");
+
+        // For end screen - to make not visiable
+        PlayerHealthBar = GameObject.FindGameObjectWithTag("PlayerHealthBar");
+        EnemyHealthBar = GameObject.FindGameObjectWithTag("EnemyHealthBar");
+        PlayerModel = GameObject.FindGameObjectWithTag("Player");
+        EnemyModel = GameObject.FindGameObjectWithTag("Enemy");
+        QuestionUI = GameObject.FindGameObjectWithTag("Question Background");
     }
 
     public IEnumerator popupDelay()
@@ -69,6 +83,12 @@ public class StateManagerScript : MonoBehaviour
         if(HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth <= 0)
         {
             _currentState = GameState.PlayerDeath;
+        }
+
+        // end screen
+        if(endScreen == true)
+        {
+            _currentState = GameState.EndGame;
         }
         switch (_currentState)
         {
@@ -106,6 +126,17 @@ public class StateManagerScript : MonoBehaviour
 
             case GameState.PlayerDeath:
                 Debug.Log("PlayeDied");
+                
+                break;
+            
+            case GameState.EndGame:
+                PlayerHealthBar.SetActive(false);
+                EnemyHealthBar.SetActive(false);
+                PlayerModel.SetActive(false);
+                EnemyModel.SetActive(false);
+                AttackPopUp.SetActive(false);
+                QuestionUI.SetActive(false);
+
                 break;
 
             default:
