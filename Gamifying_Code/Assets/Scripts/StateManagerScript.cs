@@ -65,6 +65,7 @@ public class StateManagerScript : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         AttackPopUp.SetActive(true);
+        QuestionUI.SetActive(false);
         popupShowing = true;
     }
 
@@ -94,6 +95,7 @@ public class StateManagerScript : MonoBehaviour
         {
             case GameState.PlayerQuestion:
 
+                QuestionUI.SetActive(true);
                 AttackPopUp.SetActive(false);
                 PlayerAttackPressed = false;
                 break;
