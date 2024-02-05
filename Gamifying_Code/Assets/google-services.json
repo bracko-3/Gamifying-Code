@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "284400221456",
+    "firebase_url": "https://gamifying-code-default-rtdb.firebaseio.com",
+    "project_id": "gamifying-code",
+    "storage_bucket": "gamifying-code.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:284400221456:android:f9161a7aded8240d797995",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.GamifyingCode"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGXp4crO8aE8dXELcDjqptBaVN4B40EWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
