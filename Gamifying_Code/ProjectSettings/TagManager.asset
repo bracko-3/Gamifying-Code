@@ -20,6 +20,7 @@ TagManager:
   - AttackButton
   - Enemy
   - Question Background
+  - Database Manager
   layers:
   - Default
   - TransparentFX

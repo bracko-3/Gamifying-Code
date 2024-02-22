@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase.Database;
+using Firebase.Extensions;
 
 public class StateManagerScript : MonoBehaviour
 {
@@ -34,6 +36,7 @@ public class StateManagerScript : MonoBehaviour
     private GameObject EnemyModel;
     private GameObject QuestionUI;
 
+    DatabaseManager databaseManager;
 
     [SerializeField]
     private GameState _currentState;
@@ -59,6 +62,9 @@ public class StateManagerScript : MonoBehaviour
         PlayerModel = GameObject.FindGameObjectWithTag("Player");
         EnemyModel = GameObject.FindGameObjectWithTag("Enemy");
         QuestionUI = GameObject.FindGameObjectWithTag("Question Background");
+
+        //For database manager
+        databaseManager = GameObject.FindGameObjectWithTag("Database Manager").GetComponent<DatabaseManager>();
     }
 
     public IEnumerator popupDelay()
@@ -139,6 +145,7 @@ public class StateManagerScript : MonoBehaviour
                 AttackPopUp.SetActive(false);
                 QuestionUI.SetActive(false);
 
+                databaseManager.CreateUser("test", 102);
                 break;
 
             default:
