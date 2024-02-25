@@ -81,6 +81,7 @@ public class StateManagerScript : MonoBehaviour
         if(PlayerAttackPressed == true)
         {
             _currentState = GameState.PlayerQuestion;
+            PlayerAttackPressed = false;
         }
 
         if(HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth <= 0)

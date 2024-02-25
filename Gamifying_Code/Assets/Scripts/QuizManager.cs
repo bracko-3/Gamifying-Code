@@ -27,7 +27,7 @@ public class QuizManager : MonoBehaviour
     private string questionToTypeWriter;
 
     //Used for telling if the attack has been pressed, so we can start a new question.
-    private bool isAttackPressed;
+    public bool isAttackPressed = false;
 
     //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
     private bool isPopupShowing;
@@ -43,19 +43,14 @@ public class QuizManager : MonoBehaviour
 
     private void Update()
     {
-        //always checking to see if the attack has been pressed
-        isAttackPressed = stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed;
-
         //always checking to see if the popup is showing, to remove the questions and answers at the same time.
         isPopupShowing = stateManager.GetComponent<StateManagerScript>().popupShowing;
         
         //if it has been pressed, type 1 question,. then turn it back to false so it doesnt go through all the questions.
         if (isAttackPressed == true)
         {
-            
-            stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
-            isAttackPressed = false;
             StartCoroutine(typeQuestionDelay());
+            isAttackPressed = false;
         }
 
         //if popup shows up, make the question and answers go away

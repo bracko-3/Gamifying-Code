@@ -10,6 +10,7 @@ public class AttackManager : MonoBehaviour
     public float PlayerHAttack = 20;
     public float EnemyAttack = 20;
     public GameObject StateManager;
+    public GameObject QuizManager;
 
     public GameObject HealthManager;
     public GameObject Player;
@@ -18,6 +19,7 @@ public class AttackManager : MonoBehaviour
     {
         StateManager = GameObject.FindGameObjectWithTag("StateManager");
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
+        QuizManager = GameObject.FindGameObjectWithTag("QuizManager");
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -25,6 +27,7 @@ public class AttackManager : MonoBehaviour
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
         Player.GetComponent<Animator>().SetTrigger("LightAttack");
 
     }
@@ -33,6 +36,7 @@ public class AttackManager : MonoBehaviour
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
         Player.GetComponent<Animator>().SetTrigger("MediumAttack");
     }
 
@@ -40,6 +44,7 @@ public class AttackManager : MonoBehaviour
     {
         HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
+        QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
         Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
     }
     //GC
