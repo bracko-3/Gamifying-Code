@@ -77,10 +77,12 @@ public class StateManagerScript : MonoBehaviour
             _currentState = GameState.PlayerAttack;
             StartCoroutine(popupDelay());
         }
+
         if(PlayerAttackPressed == true)
         {
-            _currentState = GameState.EnemyAttack;
+            _currentState = GameState.PlayerQuestion;
         }
+
         if(HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth <= 0)
         {
             _currentState = GameState.PlayerDeath;
@@ -98,18 +100,22 @@ public class StateManagerScript : MonoBehaviour
                 QuestionUI.SetActive(true);
                 AttackPopUp.SetActive(false);
                 PlayerAttackPressed = false;
+                Debug.Log("Game State: Player Question");
+
                 break;
 
             case GameState.PlayerAttack:
+                Debug.Log("GameState: Player attack");
                 foreach (GameObject Answerbutton in AnswerBtns)
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
                 CorrectAnswerPressed = false;
+
                 break;
 
             case GameState.EnemyAttack:
-                Debug.Log("EnemyTurnTo attack");
+                Debug.Log("Game State: Enemy Attack");
                 
                 AttackPopUp.SetActive(false);
                 HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
