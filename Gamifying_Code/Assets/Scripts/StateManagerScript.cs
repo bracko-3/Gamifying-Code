@@ -96,7 +96,6 @@ public class StateManagerScript : MonoBehaviour
         switch (_currentState)
         {
             case GameState.PlayerQuestion:
-
                 QuestionUI.SetActive(true);
                 AttackPopUp.SetActive(false);
                 PlayerAttackPressed = false;
