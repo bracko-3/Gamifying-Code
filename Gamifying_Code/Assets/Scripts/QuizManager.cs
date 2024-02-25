@@ -49,14 +49,11 @@ public class QuizManager : MonoBehaviour
         //always checking to see if the popup is showing, to remove the questions and answers at the same time.
         isPopupShowing = stateManager.GetComponent<StateManagerScript>().popupShowing;
         
-
         //if it has been pressed, type 1 question,. then turn it back to false so it doesnt go through all the questions.
         if (isAttackPressed == true)
         {
-            Debug.Log("True!!");
-            typeQuestion();
-            stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
             isAttackPressed = false;
+            StartCoroutine(typeQuestionDelay());
         }
 
         //if popup shows up, make the question and answers go away
@@ -67,6 +64,13 @@ public class QuizManager : MonoBehaviour
             stateManager.GetComponent<StateManagerScript>().popupShowing = false;
         }
     }
+
+    public IEnumerator typeQuestionDelay()
+    {
+        yield return new WaitForSeconds(2);
+        typeQuestion();
+    }
+
 
     public void correct()
     {
@@ -105,7 +109,6 @@ public class QuizManager : MonoBehaviour
 
     public void resetQuestionAndAnswers()
     {
-        Debug.Log("reseting");
         QuestionTxt.text = "";
         for (int i = 0; i < options.Length; i++)
         {
