@@ -98,7 +98,6 @@ public class StateManagerScript : MonoBehaviour
             case GameState.PlayerQuestion:
                 QuestionUI.SetActive(true);
                 AttackPopUp.SetActive(false);
-                PlayerAttackPressed = false;
                 Debug.Log("Game State: Player Question");
 
                 break;
