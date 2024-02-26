@@ -35,9 +35,13 @@ public class QuizManager : MonoBehaviour
     //To show what question you're on
     private int questionNumber = 0;
 
+    //unique identifier for firebase
+    private string userID;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
+        userID = SystemInfo.deviceUniqueIdentifier;
         typeQuestion();
     }
 
@@ -140,6 +144,8 @@ public class QuizManager : MonoBehaviour
 
     public void endGame() {
         stateManager.GetComponent<StateManagerScript>().endScreen = true;
+        FirebaseAPI.User userInfo = new FirebaseAPI.User("test-game-code", "bracko3", 5, 8);
+        FirebaseAPI.PostUser(userInfo, userID);
     }
 
     IEnumerator ShowQuestion()
