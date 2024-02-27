@@ -21,14 +21,12 @@ public class AnswerScript : MonoBehaviour
         if(isCorrect)
         {
             GetComponent<Image>().color = Color.green;
-            Debug.Log("Correct Answer");
             quizManager.correct();
         }
         else
         {
             GetComponent<Button>().interactable = false;
             GetComponent<Image>().color = Color.red;
-            Debug.Log("Wrong Answer");
 
             for (int i = 0; i < quizManager.options.Length; i++)
             {
