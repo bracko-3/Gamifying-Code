@@ -22,6 +22,11 @@ public class HealthManager : MonoBehaviour
     private Image PlayerIcon;
     private Image EnemyIcon;
 
+    public int enemyDeathCounter;
+    public GameObject enemyspawnlocation;
+    public GameObject Enemy;
+    
+
 
     
 
@@ -45,6 +50,8 @@ public class HealthManager : MonoBehaviour
 
         //Sets the max value of the slider to the Players Max Health
         EnemySlider.maxValue = EnemyMaxHealth;
+
+        enemyspawnlocation = GameObject.FindGameObjectWithTag("EnemySpawnLocation");
     }
 
     // Update is called once per frame
@@ -53,6 +60,17 @@ public class HealthManager : MonoBehaviour
         //Update the health every frame(might change this later)
         EnemySlider.value = EnemyCurrentHealth;
         PlayerSlider.value = PlayerCurrentHealth;
+
+        if(EnemyCurrentHealth <= 0)
+        {
+            Enemy = GameObject.FindGameObjectWithTag("Enemy");
+            Destroy(Enemy);
+            enemyspawnlocation.GetComponent<EnemySpawnLocation>().EnemyPicker = Random.Range(1,3);
+            EnemyCurrentHealth = 100;
+
+        }
+        Enemy = enemyspawnlocation.GetComponent<EnemySpawnLocation>().currentEnemy;
+
     }
 
     //Call this Function to do damage to the Enemy
