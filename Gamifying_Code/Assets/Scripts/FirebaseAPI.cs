@@ -11,29 +11,35 @@ public class FirebaseAPI : MonoBehaviour
     public class User
     {
         public string userName;
-        public string gameCode;
         public int qAnswered;
         public int qAttempts;
 
-        public User(string userName, string gameCode, int qAnswered, int qAttempts)
+        public User(string userName, int qAnswered, int qAttempts)
         {
             this.userName = userName;
-            this.gameCode = gameCode;
             this.qAnswered = qAnswered;
             this.qAttempts = qAttempts;
         }
+
+        // Method to update qAnswered
+        public void SetQAnswered(int value)
+        {
+            qAnswered = value;
+        }
+
+        // Method to update qAttempts
+        public void SetQAttempts(int value)
+        {
+            qAttempts = value;
+        }
     }
 
-    // -----------------
-    // API Information
-    // -----------------
+    // Base URL - never changes
+    private static readonly string databaseURL = "https://gamifying-code-2024-default-rtdb.firebaseio.com/";
 
-    private const string projectID = "gamifying-code-2024";
-    private static readonly string databaseURL = $"https://{projectID}.firebaseio.com/";
-
-    //Initial user info sent to database
-    public static void PostUser(User user, string userID)
+    // First call to the database to input user
+    public static void PostUser(User user, string gameCode, string userID)
     {
-        RestClient.Put<User>($"{databaseURL}users/{userID}.json", user);
+        RestClient.Put<User>($"{databaseURL}{gameCode}/{userID}.json", user);
     }
 }
