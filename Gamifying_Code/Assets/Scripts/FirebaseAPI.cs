@@ -37,7 +37,7 @@ public class FirebaseAPI : MonoBehaviour
     // Base URL - never changes
     private static readonly string databaseURL = "https://gamifying-code-2024-default-rtdb.firebaseio.com/";
 
-    // First call to the database to input user
+    // Send user information to the database
     public static void PostUser(User user, string gameCode, string userID)
     {
         RestClient.Put<User>($"{databaseURL}{gameCode}/{userID}.json", user);
