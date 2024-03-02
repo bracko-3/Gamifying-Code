@@ -11,26 +11,26 @@ public class FirebaseAPI : MonoBehaviour
     public class User
     {
         public string userName;
-        public int qAnswered;
-        public int qAttempts;
+        public int totalQuestions;
+        public int questionsCorrect;
 
-        public User(string userName, int qAnswered, int qAttempts)
+        public User(string userName, int totalQuestions, int questionsCorrect)
         {
             this.userName = userName;
-            this.qAnswered = qAnswered;
-            this.qAttempts = qAttempts;
+            this.totalQuestions = totalQuestions;
+            this.questionsCorrect = questionsCorrect;
         }
 
         // Method to update qAnswered
-        public void SetQAnswered(int value)
+        public void SetTotalQuestions(int value)
         {
-            qAnswered = value;
+            totalQuestions = value;
         }
 
         // Method to update qAttempts
-        public void SetQAttempts(int value)
+        public void SetQuestionsCorrect(int value)
         {
-            qAttempts = value;
+            questionsCorrect = value;
         }
     }
 
