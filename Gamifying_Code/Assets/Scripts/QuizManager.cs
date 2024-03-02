@@ -35,10 +35,30 @@ public class QuizManager : MonoBehaviour
     //To show what question you're on
     private int questionNumber = 0;
 
+    //declare at class level
+    private FirebaseAPI.User userInfo;
+
+    //unique identifier for firebase
+    private string userID;
+    private string gameCode; // TODO: Need to make this based on input at beginning of the game.
+    private string userName; // TODO: Need to make this based on input at beginning of the game.
+    public int questionAttempts = 0;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
+        userID = SystemInfo.deviceUniqueIdentifier;
         typeQuestion();
+
+        // firebase variables
+        gameCode = "TSTCD1"; // TODO: Need to make this based on input at beginning of the game.
+        userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
+
+        // create new user
+        userInfo = new FirebaseAPI.User(userName, 0, 0);
+
+        // Send new user to firebase
+        FirebaseAPI.PostUser(userInfo, gameCode, userID);
     }
 
     private void Update()
@@ -72,6 +92,26 @@ public class QuizManager : MonoBehaviour
     {
         QnA.RemoveAt(currentQuestionInt);
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
+
+        Debug.Log($"Question Attempts = {questionAttempts}");
+
+        if(questionAttempts == 1)
+        {
+            userInfo.totalQuestions += 1;
+            userInfo.questionsCorrect += 1;
+            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+
+            //reset for next question 
+            questionAttempts = 0;
+        }
+        else
+        {
+            userInfo.totalQuestions += 1;
+            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+
+            //reset for next question 
+            questionAttempts = 0;
+        }
     }
 
     public IEnumerator setAnswers()

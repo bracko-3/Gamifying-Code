@@ -20,6 +20,7 @@ public class AnswerScript : MonoBehaviour
     {
         if(isCorrect)
         {
+            quizManager.questionAttempts += 1;
             GetComponent<Image>().color = Color.green;
             quizManager.correct();
         }
@@ -27,6 +28,7 @@ public class AnswerScript : MonoBehaviour
         {
             GetComponent<Button>().interactable = false;
             GetComponent<Image>().color = Color.red;
+            quizManager.questionAttempts += 1;
 
             for (int i = 0; i < quizManager.options.Length; i++)
             {
