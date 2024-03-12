@@ -9,6 +9,11 @@ public class AttackManager : MonoBehaviour
     public float PlayerMAttack = 15;
     public float PlayerHAttack = 20;
     public float EnemyAttack = 20;
+
+    public float FailedLAttack = 2;
+    public float FailedMAttack = 3;
+    public float FailedHAttack = 5;
+
     public GameObject StateManager;
     public GameObject QuizManager;
 
@@ -25,27 +30,60 @@ public class AttackManager : MonoBehaviour
 
     public void ApplyLAttack()  
     {
-        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
+        float hitChance = 0.8f; // 80% chance to land.
+        if (Random.value <= hitChance)
+        {
+            HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
+            Player.GetComponent<Animator>().SetTrigger("LightAttack");
+            Debug.Log("Attack successful!");
+        }
+        else
+        {
+            HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedLAttack);
+            Debug.Log("Attack missed!");
+        }
+        
+        // Attack is pressed no matter what.
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
-        Player.GetComponent<Animator>().SetTrigger("LightAttack");
-
     }
 
     public void ApplyMAttack()
     {
-        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
+        float hitChance = 0.6f; // 60% chance to land.
+        if (Random.value <= hitChance)
+        {
+            HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
+            Player.GetComponent<Animator>().SetTrigger("MediumAttack");
+        }
+        else
+        {
+            HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedMAttack);
+            Debug.Log("Attack missed!");
+        }
+        
+        // Attack is pressed no matter what.
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
-        Player.GetComponent<Animator>().SetTrigger("MediumAttack");
     }
 
     public void ApplyHAttack()
     {
-        HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
+        float hitChance = 0.4f; // 40% chance to land.
+        if (Random.value <= hitChance)
+        {
+            HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
+            Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
+            Debug.Log("Attack successful!");
+        }
+        else
+        {
+            HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedHAttack);
+            Debug.Log("Attack missed!");
+        }
+        
+        // Attack is pressed no matter what.
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         QuizManager.GetComponent<QuizManager>().isAttackPressed = true;
-        Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
     }
-    //GC
 }
