@@ -9,13 +9,14 @@ public class EnemySpawnLocation : MonoBehaviour
   
     public GameObject ComputerEnemy;
     public GameObject BlockEnemy;
+    public GameObject BlockEnemyOrange;
     public GameObject currentEnemy;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        EnemyPicker = Random.Range(1, 3);
+        EnemyPicker = Random.Range(1, 4);
     }
 
     // Update is called once per frame
@@ -32,6 +33,12 @@ public class EnemySpawnLocation : MonoBehaviour
         else if(EnemyPicker == 2)
         {
             Instantiate(BlockEnemy, enemySpawnLocation.transform.position, Quaternion.identity
+                );
+            EnemyPicker = 0;
+        }
+        else if(EnemyPicker == 3)
+        {
+            Instantiate(BlockEnemyOrange, enemySpawnLocation.transform.position, Quaternion.identity
                 );
             EnemyPicker = 0;
         }

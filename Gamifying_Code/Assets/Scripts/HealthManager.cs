@@ -60,6 +60,7 @@ public class HealthManager : MonoBehaviour
         //Update the health every frame(might change this later)
         EnemySlider.value = EnemyCurrentHealth;
         PlayerSlider.value = PlayerCurrentHealth;
+        Enemy = enemyspawnlocation.GetComponent<EnemySpawnLocation>().currentEnemy;
 
         if(EnemyCurrentHealth <= 0)
         {
@@ -69,7 +70,6 @@ public class HealthManager : MonoBehaviour
             EnemyCurrentHealth = 100;
 
         }
-        Enemy = enemyspawnlocation.GetComponent<EnemySpawnLocation>().currentEnemy;
 
     }
 
