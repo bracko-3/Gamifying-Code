@@ -66,7 +66,7 @@ public class HealthManager : MonoBehaviour
         {
             Enemy = GameObject.FindGameObjectWithTag("Enemy");
             Destroy(Enemy);
-            enemyspawnlocation.GetComponent<EnemySpawnLocation>().EnemyPicker = Random.Range(1,3);
+            enemyspawnlocation.GetComponent<EnemySpawnLocation>().EnemyPicker = Random.Range(1,4);
             EnemyCurrentHealth = 100;
 
         }
