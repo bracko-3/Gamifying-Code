@@ -38,11 +38,13 @@ public class AttackManager : MonoBehaviour
             HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
             Player.GetComponent<Animator>().SetTrigger("LightAttack");
             quizManagerScript.IncrementAttacksLanded();
+            quizManagerScript.attackLLanded();
         }
         else
         {
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedLAttack);
             quizManagerScript.IncrementAttacksFailed();
+            quizManagerScript.attackLFailed();
         }
         
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
@@ -59,11 +61,13 @@ public class AttackManager : MonoBehaviour
             HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerMAttack);
             Player.GetComponent<Animator>().SetTrigger("MediumAttack");
             quizManagerScript.IncrementAttacksLanded();
+            quizManagerScript.attackMLanded();
         }
         else
         {
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedMAttack);
             quizManagerScript.IncrementAttacksFailed();
+            quizManagerScript.attackMFailed();
         }
         
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
@@ -80,11 +84,13 @@ public class AttackManager : MonoBehaviour
             HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerHAttack);
             Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
             quizManagerScript.IncrementAttacksLanded();
+            quizManagerScript.attackHLanded();
         }
         else
         {
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedHAttack);
             quizManagerScript.IncrementAttacksFailed();
+            quizManagerScript.attackHFailed();
         }
         
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
