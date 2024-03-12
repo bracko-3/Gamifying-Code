@@ -20,15 +20,15 @@ public class AnswerScript : MonoBehaviour
     {
         if(isCorrect)
         {
+            quizManager.questionAttempts += 1;
             GetComponent<Image>().color = Color.green;
-            Debug.Log("Correct Answer");
             quizManager.correct();
         }
         else
         {
             GetComponent<Button>().interactable = false;
             GetComponent<Image>().color = Color.red;
-            Debug.Log("Wrong Answer");
+            quizManager.questionAttempts += 1;
 
             for (int i = 0; i < quizManager.options.Length; i++)
             {

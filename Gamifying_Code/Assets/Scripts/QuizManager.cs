@@ -27,7 +27,7 @@ public class QuizManager : MonoBehaviour
     private string questionToTypeWriter;
 
     //Used for telling if the attack has been pressed, so we can start a new question.
-    private bool isAttackPressed;
+    public bool isAttackPressed = false;
 
     //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
     private bool isPopupShowing;
@@ -35,27 +35,41 @@ public class QuizManager : MonoBehaviour
     //To show what question you're on
     private int questionNumber = 0;
 
+    //declare at class level
+    private FirebaseAPI.User userInfo;
+
+    //unique identifier for firebase
+    private string userID;
+    private string gameCode; // TODO: Need to make this based on input at beginning of the game.
+    private string userName; // TODO: Need to make this based on input at beginning of the game.
+    public int questionAttempts = 0;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
+        userID = SystemInfo.deviceUniqueIdentifier;
         typeQuestion();
+
+        // firebase variables
+        gameCode = "TSTCD1"; // TODO: Need to make this based on input at beginning of the game.
+        userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
+
+        // create new user
+        userInfo = new FirebaseAPI.User(userName, 0, 0);
+
+        // Send new user to firebase
+        FirebaseAPI.PostUser(userInfo, gameCode, userID);
     }
 
     private void Update()
     {
-        //always checking to see if the attack has been pressed
-        isAttackPressed = stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed;
-
         //always checking to see if the popup is showing, to remove the questions and answers at the same time.
         isPopupShowing = stateManager.GetComponent<StateManagerScript>().popupShowing;
         
-
         //if it has been pressed, type 1 question,. then turn it back to false so it doesnt go through all the questions.
         if (isAttackPressed == true)
         {
-            Debug.Log("True!!");
-            typeQuestion();
-            stateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = false;
+            StartCoroutine(typeQuestionDelay());
             isAttackPressed = false;
         }
 
@@ -68,10 +82,36 @@ public class QuizManager : MonoBehaviour
         }
     }
 
+    public IEnumerator typeQuestionDelay()
+    {
+        yield return new WaitForSeconds(2);
+        typeQuestion();
+    }
+
     public void correct()
     {
         QnA.RemoveAt(currentQuestionInt);
         stateManager.GetComponent<StateManagerScript>().CorrectAnswerPressed = true;
+
+        Debug.Log($"Question Attempts = {questionAttempts}");
+
+        if(questionAttempts == 1)
+        {
+            userInfo.totalQuestions += 1;
+            userInfo.questionsCorrect += 1;
+            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+
+            //reset for next question 
+            questionAttempts = 0;
+        }
+        else
+        {
+            userInfo.totalQuestions += 1;
+            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+
+            //reset for next question 
+            questionAttempts = 0;
+        }
     }
 
     public IEnumerator setAnswers()
@@ -105,7 +145,6 @@ public class QuizManager : MonoBehaviour
 
     public void resetQuestionAndAnswers()
     {
-        Debug.Log("reseting");
         QuestionTxt.text = "";
         for (int i = 0; i < options.Length; i++)
         {
