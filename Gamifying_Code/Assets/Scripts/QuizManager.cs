@@ -32,9 +32,6 @@ public class QuizManager : MonoBehaviour
     //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
     private bool isPopupShowing;
 
-    
-    
-
     //declare at class level
     private FirebaseAPI.User userInfo;
 
@@ -47,6 +44,9 @@ public class QuizManager : MonoBehaviour
     public int attacksLanded = 0;
     public int attacksFailed = 0;
     public int gamifyScore = 0;
+
+    // for gamify score
+    public bool answerCorrectOnFirstTry = false;
 
     public int typeOfAttack = 0;
 
@@ -105,7 +105,7 @@ public class QuizManager : MonoBehaviour
         {
             userInfo.totalQuestions += 1;
             userInfo.questionsCorrect += 1;
-            //FirebaseAPI.PostUser(userInfo, gameCode, userID);
+            answerCorrectOnFirstTry = true;
 
             //reset for next question 
             questionAttempts = 0;
@@ -113,7 +113,6 @@ public class QuizManager : MonoBehaviour
         else
         {
             userInfo.totalQuestions += 1;
-            //FirebaseAPI.PostUser(userInfo, gameCode, userID);
 
             //reset for next question 
             questionAttempts = 0;
@@ -207,12 +206,103 @@ public class QuizManager : MonoBehaviour
     public void IncrementAttacksLanded() 
     {
         userInfo.attacksLanded += 1;
-        UpdatePlayerInfo(); // Optionally call update method here or explicitly after incrementing.
     }
 
     public void IncrementAttacksFailed() 
     {
         userInfo.attacksFailed += 1;
-        UpdatePlayerInfo(); // Optionally call update method here or explicitly after incrementing.
+    }
+
+    // Small attack landed and failed
+    public void attackLLanded ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 70;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 45;
+            UpdatePlayerInfo();
+        }
+    }
+
+    public void attackLFailed ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 40;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 15;
+            UpdatePlayerInfo();
+        }
+    }
+
+    // Medium attack landed and failed
+    public void attackMLanded ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 85;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 60;
+            UpdatePlayerInfo();
+        }
+    }
+
+    public void attackMFailed ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 35;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 10;
+            UpdatePlayerInfo();
+        }
+    }
+
+    // High attack landed and failed
+    public void attackHLanded ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 100;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 75;
+            UpdatePlayerInfo();
+        }
+    }
+
+    public void attackHFailed ()
+    {
+        if (answerCorrectOnFirstTry = true)
+        {
+            userInfo.gamifyScore += 25;
+            answerCorrectOnFirstTry = false;
+            UpdatePlayerInfo();
+        }
+        else
+        {
+            userInfo.gamifyScore += 0;
+            UpdatePlayerInfo();
+        }
     }
 }
