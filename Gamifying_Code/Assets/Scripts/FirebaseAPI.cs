@@ -13,24 +13,18 @@ public class FirebaseAPI : MonoBehaviour
         public string userName;
         public int totalQuestions;
         public int questionsCorrect;
+        public int attacksLanded;
+        public int attacksFailed;
+        public int gamifyScore;
 
-        public User(string userName, int totalQuestions, int questionsCorrect)
+        public User(string userName, int totalQuestions, int questionsCorrect, int attacksLanded, int attacksFailed, int gamifyScore)
         {
             this.userName = userName;
             this.totalQuestions = totalQuestions;
             this.questionsCorrect = questionsCorrect;
-        }
-
-        // Method to update qAnswered
-        public void SetTotalQuestions(int value)
-        {
-            totalQuestions = value;
-        }
-
-        // Method to update qAttempts
-        public void SetQuestionsCorrect(int value)
-        {
-            questionsCorrect = value;
+            this.attacksLanded = attacksLanded;
+            this.attacksFailed = attacksFailed;
+            this.gamifyScore = gamifyScore;
         }
     }
 

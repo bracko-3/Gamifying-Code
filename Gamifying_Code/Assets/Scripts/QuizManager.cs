@@ -32,8 +32,8 @@ public class QuizManager : MonoBehaviour
     //Used for telling if the popup shows up, so we can reset the questions and answers to blank.
     private bool isPopupShowing;
 
-    //To show what question you're on
-    private int questionNumber = 0;
+    
+    
 
     //declare at class level
     private FirebaseAPI.User userInfo;
@@ -43,6 +43,12 @@ public class QuizManager : MonoBehaviour
     private string gameCode; // TODO: Need to make this based on input at beginning of the game.
     private string userName; // TODO: Need to make this based on input at beginning of the game.
     public int questionAttempts = 0;
+    public int questionNumber = 0;
+    public int attacksLanded = 0;
+    public int attacksFailed = 0;
+    public int gamifyScore = 0;
+
+    public int typeOfAttack = 0;
 
     private void Start()
     {
@@ -54,8 +60,8 @@ public class QuizManager : MonoBehaviour
         gameCode = "TSTCD1"; // TODO: Need to make this based on input at beginning of the game.
         userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
 
-        // create new user
-        userInfo = new FirebaseAPI.User(userName, 0, 0);
+        // create new user with no info when game starts.
+        userInfo = new FirebaseAPI.User(userName, 0, 0, 0, 0, 0);
 
         // Send new user to firebase
         FirebaseAPI.PostUser(userInfo, gameCode, userID);
@@ -99,7 +105,7 @@ public class QuizManager : MonoBehaviour
         {
             userInfo.totalQuestions += 1;
             userInfo.questionsCorrect += 1;
-            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+            //FirebaseAPI.PostUser(userInfo, gameCode, userID);
 
             //reset for next question 
             questionAttempts = 0;
@@ -107,7 +113,7 @@ public class QuizManager : MonoBehaviour
         else
         {
             userInfo.totalQuestions += 1;
-            FirebaseAPI.PostUser(userInfo, gameCode, userID);
+            //FirebaseAPI.PostUser(userInfo, gameCode, userID);
 
             //reset for next question 
             questionAttempts = 0;
@@ -191,5 +197,22 @@ public class QuizManager : MonoBehaviour
             yield return new WaitForSeconds(questionDelay);
         }
         StartCoroutine(setAnswers());
+    }
+
+    public void UpdatePlayerInfo() 
+    {
+        FirebaseAPI.PostUser(userInfo, gameCode, userID);
+    }
+
+    public void IncrementAttacksLanded() 
+    {
+        userInfo.attacksLanded += 1;
+        UpdatePlayerInfo(); // Optionally call update method here or explicitly after incrementing.
+    }
+
+    public void IncrementAttacksFailed() 
+    {
+        userInfo.attacksFailed += 1;
+        UpdatePlayerInfo(); // Optionally call update method here or explicitly after incrementing.
     }
 }
