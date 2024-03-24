@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class QuizManager : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class QuizManager : MonoBehaviour
     public Text YS_correctquestions;
     public Text YS_attackslanded;
     public Text YS_quizpercentage;
+    private int quizPercent;
 
     private void Start()
     {
@@ -168,7 +170,7 @@ public class QuizManager : MonoBehaviour
 
     public string generateQuestion()
     {
-            currentQuestionInt = Random.Range(0, QnA.Count);
+            currentQuestionInt = UnityEngine.Random.Range(0, QnA.Count);
 
             currentQuestion = QnA[currentQuestionInt].Question;
 
@@ -194,13 +196,15 @@ public class QuizManager : MonoBehaviour
     public void endGame() {
         stateManager.GetComponent<StateManagerScript>().endScreen = true;
 
+        quizPercent = (int)Math.Round((float)userInfo.questionsCorrect / userInfo.totalQuestions * 100);
+
         // assigning user information to the Your Scores Section
         YS_username.text = "User: " + userName;
         YS_gamifyscore.text = "Gamify: " + userInfo.gamifyScore;
         YS_totalquestions.text = "Total Questions: " + userInfo.totalQuestions;
         YS_correctquestions.text = "Correct Questions: " + userInfo.questionsCorrect;
         YS_attackslanded.text = "Attacks Landed: " + userInfo.attacksLanded;
-        YS_quizpercentage.text = "Quiz Percentage: ";
+        YS_quizpercentage.text = "Quiz Percentage: " + quizPercent + "%";
     }
 
     IEnumerator ShowQuestion()
