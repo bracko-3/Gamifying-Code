@@ -50,6 +50,14 @@ public class QuizManager : MonoBehaviour
 
     public int typeOfAttack = 0;
 
+    // for Your Scores Leaderboard
+    public Text YS_username;
+    public Text YS_gamifyscore;
+    public Text YS_totalquestions;
+    public Text YS_correctquestions;
+    public Text YS_attackslanded;
+    public Text YS_quizpercentage;
+
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
@@ -185,6 +193,9 @@ public class QuizManager : MonoBehaviour
 
     public void endGame() {
         stateManager.GetComponent<StateManagerScript>().endScreen = true;
+
+        // assigning user information to the Your Scores Section
+
     }
 
     IEnumerator ShowQuestion()
