@@ -33,6 +33,7 @@ public class StateManagerScript : MonoBehaviour
     private GameObject PlayerModel;
     private GameObject EnemyModel;
     private GameObject QuestionUI;
+    private GameObject EndScreenLeaderboard;
 
 
     [SerializeField]
@@ -59,6 +60,10 @@ public class StateManagerScript : MonoBehaviour
         PlayerModel = GameObject.FindGameObjectWithTag("Player");
         EnemyModel = GameObject.FindGameObjectWithTag("Enemy");
         QuestionUI = GameObject.FindGameObjectWithTag("Question Background");
+        EndScreenLeaderboard = GameObject.FindGameObjectWithTag("EndScreenLeaderboard");
+
+        // Set end screen to inactive until end of game.
+        EndScreenLeaderboard.SetActive(false);
     }
 
     public IEnumerator popupDelay()
@@ -140,14 +145,14 @@ public class StateManagerScript : MonoBehaviour
                 PlayerHealthBar.SetActive(false);
                 EnemyHealthBar.SetActive(false);
                 PlayerModel.SetActive(false);
-                EnemyModel.SetActive(false);
                 AttackPopUp.SetActive(false);
                 QuestionUI.SetActive(false);
+                EndScreenLeaderboard.SetActive(true);
 
                 break;
 
             default:
                 break;
-        }//Gc
+        }
     }
 }

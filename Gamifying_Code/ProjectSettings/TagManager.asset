@@ -21,6 +21,9 @@ TagManager:
   - Enemy
   - Question Background
   - EnemySpawnLocation
+  - EndScreenLeaderboard
+  - EndScreenYourScores
+  - EndScreenGroupLeaderboard
   layers:
   - Default
   - TransparentFX
