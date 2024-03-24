@@ -34,6 +34,7 @@ public class StateManagerScript : MonoBehaviour
     private GameObject EnemyModel;
     private GameObject QuestionUI;
     private GameObject EndScreenLeaderboard;
+    public GameObject testest;
 
 
     [SerializeField]
@@ -61,6 +62,7 @@ public class StateManagerScript : MonoBehaviour
         EnemyModel = GameObject.FindGameObjectWithTag("Enemy");
         QuestionUI = GameObject.FindGameObjectWithTag("Question Background");
         EndScreenLeaderboard = GameObject.FindGameObjectWithTag("EndScreenLeaderboard");
+        
 
         // Set end screen to inactive until end of game.
         EndScreenLeaderboard.SetActive(false);
@@ -77,6 +79,7 @@ public class StateManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        testest = GameObject.FindGameObjectWithTag("Enemy");
         if(CorrectAnswerPressed == true)
         {
             _currentState = GameState.PlayerAttack;
@@ -148,6 +151,7 @@ public class StateManagerScript : MonoBehaviour
                 AttackPopUp.SetActive(false);
                 QuestionUI.SetActive(false);
                 EndScreenLeaderboard.SetActive(true);
+                testest.SetActive(false);
 
                 break;
 
