@@ -195,7 +195,12 @@ public class QuizManager : MonoBehaviour
         stateManager.GetComponent<StateManagerScript>().endScreen = true;
 
         // assigning user information to the Your Scores Section
-
+        YS_username.text = "User: " + userName;
+        YS_gamifyscore.text = "Gamify: " + userInfo.gamifyScore;
+        YS_totalquestions.text = "Total Questions: " + userInfo.totalQuestions;
+        YS_correctquestions.text = "Correct Questions: " + userInfo.questionsCorrect;
+        YS_attackslanded.text = "Attacks Landed: " + userInfo.attacksLanded;
+        YS_quizpercentage.text = "Quiz Percentage: ";
     }
 
     IEnumerator ShowQuestion()
