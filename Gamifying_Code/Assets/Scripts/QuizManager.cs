@@ -38,7 +38,7 @@ public class QuizManager : MonoBehaviour
 
     //unique identifier for firebase
     private string userID;
-    private string gameCode; // TODO: Need to make this based on input at beginning of the game.
+    public string gameCode; // TODO: Need to make this based on input at beginning of the game.
     private string userName; // TODO: Need to make this based on input at beginning of the game.
     public int questionAttempts = 0;
     public int questionNumber = 0;
