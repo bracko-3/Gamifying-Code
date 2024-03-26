@@ -63,7 +63,7 @@ public class QuizManager : MonoBehaviour
     private void Start()
     {
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
-        userID = SystemInfo.deviceUniqueIdentifier;
+        userID = Guid.NewGuid().ToString();
         typeQuestion();
 
         // firebase variables
