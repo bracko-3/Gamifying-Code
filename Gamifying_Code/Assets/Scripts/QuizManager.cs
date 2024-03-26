@@ -62,6 +62,8 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
+        userID = StartScreenLogic.UserName;
+        gameCode = StartScreenLogic.gameCode;
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
         userID = Guid.NewGuid().ToString();
         typeQuestion();
