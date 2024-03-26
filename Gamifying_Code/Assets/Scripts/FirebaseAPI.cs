@@ -41,25 +41,33 @@ public class FirebaseAPI : MonoBehaviour
     public static IEnumerator GetUsers(string gameCode, System.Action<List<User>> callback)
     {
         string requestURL = $"{databaseURL}{gameCode}.json";
-        RestClient.Get<Dictionary<string, User>>(requestURL).Then(response =>
+        RestClient.Get(requestURL).Then(response =>
         {
-            // Log the raw response to see what we got back
-            Debug.Log($"Received data: {response.Count} users");
+            Debug.Log($"Raw JSON response: {response.Text}");
 
-            // Convert the response dictionary to a list of Users
-            List<User> users = response.Values.ToList();
-
-            // Optionally, log the received users' details for further inspection
-            foreach (var user in users)
+            // Attempt to deserialize the response into a dictionary
+            var usersDict = JsonUtility.FromJson<Dictionary<string, User>>(response.Text);
+            if (usersDict != null)
             {
-                Debug.Log($"User: {user.userName}, Score: {user.gamifyScore}");
+                // Convert the dictionary to a list of Users
+                List<User> usersList = usersDict.Values.ToList();
+
+                // Sort the users list in descending order based on gamifyScore
+                usersList.Sort((x, y) => y.gamifyScore.CompareTo(x.gamifyScore));
+
+                // If there are more than 10 users, limit the list to the top 10
+                if (usersList.Count > 10)
+                {
+                    usersList = usersList.Take(10).ToList();
+                }
+
+                // Invoke the callback with the sorted and limited list
+                callback(usersList);
             }
-
-            // Sort the users list in descending order based on gamifyScore
-            users.Sort((x, y) => y.gamifyScore.CompareTo(x.gamifyScore));
-
-            // Invoke the callback with the sorted list
-            callback(users);
+            else
+            {
+                Debug.LogWarning("Failed to deserialize users.");
+            }
         }).Catch(error =>
         {
             Debug.LogError($"Failed to fetch users: {error}");
