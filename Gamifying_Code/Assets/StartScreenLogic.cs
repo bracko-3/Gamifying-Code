@@ -5,6 +5,8 @@ using UnityEngine;
 public class StartScreenLogic : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static string UserName;
+    public static int sessionID;
     void Start()
     {
         
