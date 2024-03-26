@@ -24,6 +24,8 @@ TagManager:
   - EndScreenLeaderboard
   - EndScreenYourScores
   - EndScreenGroupLeaderboard
+  - NameField
+  - GameCode
   layers:
   - Default
   - TransparentFX

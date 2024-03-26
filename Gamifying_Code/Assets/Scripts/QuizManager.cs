@@ -39,7 +39,7 @@ public class QuizManager : MonoBehaviour
     //unique identifier for firebase
     private string userID;
     public string gameCode; // TODO: Need to make this based on input at beginning of the game.
-    private string userName; // TODO: Need to make this based on input at beginning of the game.
+    public string userName; // TODO: Need to make this based on input at beginning of the game.
     public int questionAttempts = 0;
     public int questionNumber = 0;
     public int attacksLanded = 0;
@@ -62,8 +62,7 @@ public class QuizManager : MonoBehaviour
 
     private void Start()
     {
-        userID = StartScreenLogic.UserName;
-        gameCode = StartScreenLogic.gameCode;
+
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
         userID = Guid.NewGuid().ToString();
         typeQuestion();
@@ -71,7 +70,8 @@ public class QuizManager : MonoBehaviour
         // firebase variables
         gameCode = "TSTCD1"; // TODO: Need to make this based on input at beginning of the game.
         userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
-
+        userName = StartScreenLogic.UserName;
+        gameCode = StartScreenLogic.gameCode;
         // create new user with no info when game starts.
         userInfo = new FirebaseAPI.User(userName, 0, 0, 0, 0, 0);
 
