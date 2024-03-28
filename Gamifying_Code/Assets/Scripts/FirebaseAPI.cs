@@ -7,6 +7,7 @@ using FullSerializer;
 using Proyecto26;
 using System.Linq;
 using RSG;
+using Newtonsoft.Json;
 
 public class FirebaseAPI : MonoBehaviour
 {
@@ -40,27 +41,19 @@ public class FirebaseAPI : MonoBehaviour
         RestClient.Put<User>($"{databaseURL}{gameCode}/{userID}.json", user);
     }
 
-    // get all entries for certain game code
-    public static void GetSingleUser(string gameCode)
+    public static void GetUsers(string gameCode, Action<List<List<object>>> callback)
     {
-        RestClient.Get($"{databaseURL}{gameCode}.json?orderBy=\"$key\"&limitToFirst=1").Then(response =>
+        RestClient.Get($"{databaseURL}{gameCode}.json").Then(response =>
         {
-            // Assuming the JSON structure is a Dictionary where the key is the user's ID
-            // and the value is the User object
-            var usersDict = JsonUtility.FromJson<Dictionary<string, User>>(response.Text);
-            if (usersDict != null && usersDict.Values.Count > 0)
-            {
-                foreach (var userEntry in usersDict)
-                {
-                    User user = userEntry.Value;
-                    Debug.Log($"User Name: {user.userName}");
-                    break; // Since we only want the first user, we break after the first iteration
-                }
-            }
-            else
-            {
-                Debug.Log("No users found.");
-            }
+            var usersDict = JsonConvert.DeserializeObject<Dictionary<string, User>>(response.Text);
+            var topUsers = usersDict.Values.OrderByDescending(u => u.gamifyScore).Take(10);
+            var topUsersList = topUsers.Select(user => new List<object> { user.userName, user.totalQuestions, user.questionsCorrect, user.attacksLanded, user.gamifyScore }).ToList();
+
+            callback?.Invoke(topUsersList); // Invoke the callback with the topUsersList
+
+        }).Catch(error =>
+        {
+            Debug.LogError(error);
         });
     }
 }

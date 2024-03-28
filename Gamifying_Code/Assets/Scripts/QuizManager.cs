@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using Newtonsoft.Json;
 
 public class QuizManager : MonoBehaviour
 {
@@ -59,9 +60,11 @@ public class QuizManager : MonoBehaviour
     public Text YS_attackslanded;
     public Text YS_quizpercentage;
     private int quizPercent;
+    public List<List<object>> leaderboardInfo;
 
     private void Start()
     {
+        leaderboardInfo = new List<List<object>>();
         stateManager = GameObject.FindGameObjectWithTag("StateManager");
         userID = Guid.NewGuid().ToString();
         typeQuestion();
@@ -78,7 +81,20 @@ public class QuizManager : MonoBehaviour
         // Send new user to firebase
         FirebaseAPI.PostUser(userInfo, gameCode, userID);
 
-        FirebaseAPI.GetSingleUser("TSTCD1");
+        FirebaseAPI.GetUsers(gameCode, HandleTopUsers);
+    }
+
+    private void HandleTopUsers(List<List<object>> topUsers)
+    {
+        // Use the topUsers list here
+        foreach (var userScorePair in topUsers)
+        {
+            leaderboardInfo.Add(userScorePair);
+        }
+
+        // Log the contents of leaderboardInfo as a JSON string
+        string json = JsonConvert.SerializeObject(leaderboardInfo);
+        Debug.Log($"from quizM: {json}");
     }
 
     private void Update()
