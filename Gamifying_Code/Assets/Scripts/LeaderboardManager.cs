@@ -53,6 +53,7 @@ public class LeaderboardManager : MonoBehaviour
         updateLeaderboard2();
         updateLeaderboard3();
         updateLeaderboard4();
+        updateLeaderboard5();
     }
     
     // [userName, totalQuestions, questionsCorrect, attacksLanded, gamifyScore]
@@ -143,5 +144,27 @@ public class LeaderboardManager : MonoBehaviour
         attacksLanded4.text = leaderboardInfo[3][3].ToString();
         quizPercentText4.text = $"{quizPercent4}%";
         gamifyScore4.text = leaderboardInfo[3][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 5
+    // ########################################
+    public Text place5;
+    public Text name5;
+    public Text attacksLanded5;
+    public Text quizPercentText5;
+    public Text gamifyScore5;
+    private int quizPercent5;
+
+    public void updateLeaderboard5()
+    {
+        int totalQuestions5 = Convert.ToInt32(leaderboardInfo[4][1]);
+        int questionsCorrect5 = Convert.ToInt32(leaderboardInfo[4][2]);
+        quizPercent5 = (int)Math.Round((float)questionsCorrect5 / totalQuestions5 * 100);
+        place5.text = "5";
+        name5.text = leaderboardInfo[4][0].ToString();
+        attacksLanded5.text = leaderboardInfo[4][3].ToString();
+        quizPercentText5.text = $"{quizPercent5}%";
+        gamifyScore5.text = leaderboardInfo[4][4].ToString();
     }
 }
