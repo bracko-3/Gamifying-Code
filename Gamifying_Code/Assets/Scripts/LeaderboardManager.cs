@@ -12,7 +12,7 @@ public class LeaderboardManager : MonoBehaviour
 
     void Start()
     {
-        gameCode = "TSTCD1";
+        gameCode = "testgame1";
         leaderboardInfo = new List<List<object>>();
 
         // get leaderboard info
@@ -49,11 +49,16 @@ public class LeaderboardManager : MonoBehaviour
 
     void Update()
     {
-        updateLeaderboard1();
-        updateLeaderboard2();
-        updateLeaderboard3();
-        updateLeaderboard4();
-        updateLeaderboard5();
+        if (leaderboardInfo.Count >= 1) updateLeaderboard1();
+        if (leaderboardInfo.Count >= 2) updateLeaderboard2();
+        if (leaderboardInfo.Count >= 3) updateLeaderboard3();
+        if (leaderboardInfo.Count >= 4) updateLeaderboard4();
+        if (leaderboardInfo.Count >= 5) updateLeaderboard5();
+        if (leaderboardInfo.Count >= 6) updateLeaderboard6();
+        if (leaderboardInfo.Count >= 7) updateLeaderboard7();
+        if (leaderboardInfo.Count >= 8) updateLeaderboard8();
+        if (leaderboardInfo.Count >= 9) updateLeaderboard9();
+        if (leaderboardInfo.Count >= 10) updateLeaderboard10();
     }
     
     // [userName, totalQuestions, questionsCorrect, attacksLanded, gamifyScore]
@@ -166,5 +171,115 @@ public class LeaderboardManager : MonoBehaviour
         attacksLanded5.text = leaderboardInfo[4][3].ToString();
         quizPercentText5.text = $"{quizPercent5}%";
         gamifyScore5.text = leaderboardInfo[4][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 6
+    // ########################################
+    public Text place6;
+    public Text name6;
+    public Text attacksLanded6;
+    public Text quizPercentText6;
+    public Text gamifyScore6;
+    private int quizPercent6;
+
+    public void updateLeaderboard6()
+    {
+        int totalQuestions6 = Convert.ToInt32(leaderboardInfo[5][1]);
+        int questionsCorrect6 = Convert.ToInt32(leaderboardInfo[5][2]);
+        quizPercent6 = (int)Math.Round((float)questionsCorrect6 / totalQuestions6 * 100);
+        place6.text = "6";
+        name6.text = leaderboardInfo[5][0].ToString();
+        attacksLanded6.text = leaderboardInfo[5][3].ToString();
+        quizPercentText6.text = $"{quizPercent6}%";
+        gamifyScore6.text = leaderboardInfo[5][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 7
+    // ########################################
+    public Text place7;
+    public Text name7;
+    public Text attacksLanded7;
+    public Text quizPercentText7;
+    public Text gamifyScore7;
+    private int quizPercent7;
+
+    public void updateLeaderboard7()
+    {
+        int totalQuestions7 = Convert.ToInt32(leaderboardInfo[6][1]);
+        int questionsCorrect7 = Convert.ToInt32(leaderboardInfo[6][2]);
+        quizPercent7 = (int)Math.Round((float)questionsCorrect7 / totalQuestions7 * 100);
+        place7.text = "7";
+        name7.text = leaderboardInfo[6][0].ToString();
+        attacksLanded7.text = leaderboardInfo[6][3].ToString();
+        quizPercentText7.text = $"{quizPercent7}%";
+        gamifyScore7.text = leaderboardInfo[6][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 8
+    // ########################################
+    public Text place8;
+    public Text name8;
+    public Text attacksLanded8;
+    public Text quizPercentText8;
+    public Text gamifyScore8;
+    private int quizPercent8;
+
+    public void updateLeaderboard8()
+    {
+        int totalQuestions8 = Convert.ToInt32(leaderboardInfo[7][1]);
+        int questionsCorrect8 = Convert.ToInt32(leaderboardInfo[7][2]);
+        quizPercent8 = (int)Math.Round((float)questionsCorrect8 / totalQuestions8 * 100);
+        place8.text = "8";
+        name8.text = leaderboardInfo[7][0].ToString();
+        attacksLanded8.text = leaderboardInfo[7][3].ToString();
+        quizPercentText8.text = $"{quizPercent8}%";
+        gamifyScore8.text = leaderboardInfo[7][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 9
+    // ########################################
+    public Text place9;
+    public Text name9;
+    public Text attacksLanded9;
+    public Text quizPercentText9;
+    public Text gamifyScore9;
+    private int quizPercent9;
+
+    public void updateLeaderboard9()
+    {
+        int totalQuestions9 = Convert.ToInt32(leaderboardInfo[8][1]);
+        int questionsCorrect9 = Convert.ToInt32(leaderboardInfo[8][2]);
+        quizPercent9 = (int)Math.Round((float)questionsCorrect9 / totalQuestions9 * 100);
+        place9.text = "9";
+        name9.text = leaderboardInfo[8][0].ToString();
+        attacksLanded9.text = leaderboardInfo[8][3].ToString();
+        quizPercentText9.text = $"{quizPercent9}%";
+        gamifyScore9.text = leaderboardInfo[8][4].ToString();
+    }
+
+    // ########################################
+    // Leaderboard row 10
+    // ########################################
+    public Text place10;
+    public Text name10;
+    public Text attacksLanded10;
+    public Text quizPercentText10;
+    public Text gamifyScore10;
+    private int quizPercent10;
+
+    public void updateLeaderboard10()
+    {
+        int totalQuestions10 = Convert.ToInt32(leaderboardInfo[9][1]);
+        int questionsCorrect10 = Convert.ToInt32(leaderboardInfo[9][2]);
+        quizPercent10 = (int)Math.Round((float)questionsCorrect10 / totalQuestions10 * 100);
+        place10.text = "10";
+        name10.text = leaderboardInfo[9][0].ToString();
+        attacksLanded10.text = leaderboardInfo[9][3].ToString();
+        quizPercentText10.text = $"{quizPercent10}%";
+        gamifyScore10.text = leaderboardInfo[9][4].ToString();
     }
 }

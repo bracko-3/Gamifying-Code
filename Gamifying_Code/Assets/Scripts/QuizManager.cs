@@ -70,7 +70,7 @@ public class QuizManager : MonoBehaviour
         typeQuestion();
 
         // firebase variables
-        gameCode = "TSTCD1"; // TODO: Need to make this based on input at beginning of the game.
+        gameCode = "testgame1"; // TODO: Need to make this based on input at beginning of the game.
         userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
         //userName = StartScreenLogic.UserName;
         //gameCode = StartScreenLogic.gameCode;
