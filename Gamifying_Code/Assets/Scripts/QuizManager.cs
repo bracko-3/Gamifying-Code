@@ -68,10 +68,10 @@ public class QuizManager : MonoBehaviour
         typeQuestion();
 
         // firebase variables
-        gameCode = "testgame1"; // TODO: Need to make this based on input at beginning of the game.
-        userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
-        //userName = StartScreenLogic.UserName;
-        //gameCode = StartScreenLogic.gameCode;
+      //  gameCode = "testgame1"; // TODO: Need to make this based on input at beginning of the game.
+      //  userName = "bracko3"; // TODO: Need to make this based on input at beginning of the game.
+        userName = StartScreenLogic.UserName;
+        gameCode = StartScreenLogic.gameCode;
 
         // create new user with no info when game starts.
         userInfo = new FirebaseAPI.User(userName, 0, 0, 0, 0, 0);
