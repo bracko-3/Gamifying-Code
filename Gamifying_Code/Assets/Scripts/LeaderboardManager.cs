@@ -12,7 +12,7 @@ public class LeaderboardManager : MonoBehaviour
 
     void Start()
     {
-        gameCode = "testgame1";
+        gameCode = StartScreenLogic.gameCode;
         leaderboardInfo = new List<List<object>>();
 
         // get leaderboard info
