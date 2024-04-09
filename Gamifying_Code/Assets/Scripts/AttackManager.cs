@@ -19,6 +19,7 @@ public class AttackManager : MonoBehaviour
 
     public GameObject HealthManager;
     public GameObject Player;
+    public GameObject attacksapwner;
 
     public void Start()
     {
@@ -26,6 +27,7 @@ public class AttackManager : MonoBehaviour
         HealthManager = GameObject.FindGameObjectWithTag("HealthManager");
         QuizManager = GameObject.FindGameObjectWithTag("QuizManager");
         Player = GameObject.FindGameObjectWithTag("Player");
+        attacksapwner = GameObject.FindGameObjectWithTag("AttackSpawner");
     }
 
     public void ApplyLAttack()  
@@ -36,9 +38,11 @@ public class AttackManager : MonoBehaviour
         if (Random.value <= hitChance)
         {
             HealthManager.GetComponent<HealthManager>().DamageEnemy(PlayerLAttack);
-            Player.GetComponent<Animator>().SetTrigger("LightAttack");
+           // Player.GetComponent<Animator>().SetTrigger("LightAttack");
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackLLanded();
+            attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject2();
+
         }
         else
         {
@@ -62,6 +66,7 @@ public class AttackManager : MonoBehaviour
             Player.GetComponent<Animator>().SetTrigger("MediumAttack");
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackMLanded();
+            attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject();
         }
         else
         {
@@ -85,6 +90,8 @@ public class AttackManager : MonoBehaviour
             Player.GetComponent<Animator>().SetTrigger("HeavyAttack");
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackHLanded();
+            attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject3();
+
         }
         else
         {

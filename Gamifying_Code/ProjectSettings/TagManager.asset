@@ -26,6 +26,7 @@ TagManager:
   - EndScreenGroupLeaderboard
   - NameField
   - GameCode
+  - AttackSpawner
   layers:
   - Default
   - TransparentFX
