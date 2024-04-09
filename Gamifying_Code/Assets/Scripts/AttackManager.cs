@@ -42,6 +42,7 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackLLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject2();
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
 
         }
         else
@@ -49,8 +50,11 @@ public class AttackManager : MonoBehaviour
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedLAttack);
             quizManagerScript.IncrementAttacksFailed();
             quizManagerScript.attackLFailed();
+            Player.GetComponent<Animator>().SetTrigger("FailedAttack");
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+
         }
-        
+
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         quizManagerScript.isAttackPressed = true;
     }
@@ -67,14 +71,20 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackMLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject();
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+
         }
         else
         {
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedMAttack);
             quizManagerScript.IncrementAttacksFailed();
             quizManagerScript.attackMFailed();
+            Player.GetComponent<Animator>().SetTrigger("FailedAttack");
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+
+
         }
-        
+
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         quizManagerScript.isAttackPressed = true;
     }
@@ -91,6 +101,8 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackHLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject3();
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+
 
         }
         else
@@ -98,8 +110,11 @@ public class AttackManager : MonoBehaviour
             HealthManager.GetComponent<HealthManager>().PlayerEnemy(FailedHAttack);
             quizManagerScript.IncrementAttacksFailed();
             quizManagerScript.attackHFailed();
+            Player.GetComponent<Animator>().SetTrigger("FailedAttack");
+            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+
         }
-        
+
         StateManager.GetComponent<StateManagerScript>().PlayerAttackPressed = true;
         quizManagerScript.isAttackPressed = true;
     }

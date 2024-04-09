@@ -35,6 +35,9 @@ public class StateManagerScript : MonoBehaviour
     private GameObject QuestionUI;
     private GameObject EndScreenLeaderboard;
     public GameObject EnemyIcon;
+    public GameObject EnemyAttackeffectManager;
+    public GameObject pickedEnemy;
+    public GameObject objectToActivate;
 
 
     [SerializeField]
@@ -44,6 +47,7 @@ public class StateManagerScript : MonoBehaviour
     public bool PlayerAttackPressed;
     public bool popupShowing = false;
     public bool endScreen = false;
+    public bool enemyattack = false;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +66,9 @@ public class StateManagerScript : MonoBehaviour
         EnemyModel = GameObject.FindGameObjectWithTag("Enemy");
         QuestionUI = GameObject.FindGameObjectWithTag("Question Background");
         EndScreenLeaderboard = GameObject.FindGameObjectWithTag("EndScreenLeaderboard");
+        pickedEnemy = GameObject.FindGameObjectWithTag("EnemySpawnLocation");
+        pickedEnemy = GameObject.FindGameObjectWithTag("EnemySpawnLocation");
+        EnemyAttackeffectManager = GameObject.FindGameObjectWithTag("EnemyAttackEffectManager");
         
 
         // Set end screen to inactive until end of game.
@@ -75,10 +82,25 @@ public class StateManagerScript : MonoBehaviour
         QuestionUI.SetActive(false);
         popupShowing = true;
     }
+    IEnumerator ActivateForTwoSeconds()
+    {
+        // Activate the object
+        objectToActivate.SetActive(true);
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Deactivate the object
+        objectToActivate.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
     {
+        if(enemyattack == true)
+        {
+            _currentState = GameState.EnemyAttack;
+        }
         EnemyIcon = GameObject.FindGameObjectWithTag("Enemy");
         if(CorrectAnswerPressed == true)
         {
@@ -127,6 +149,8 @@ public class StateManagerScript : MonoBehaviour
                 AttackPopUp.SetActive(false);
                 HealthManager.GetComponent<HealthManager>().PlayerCurrentHealth -= AttackManager.GetComponent<AttackManager>().EnemyAttack;
                 _currentState = GameState.PlayerQuestion;
+                StartCoroutine(ActivateForTwoSeconds());
+                enemyattack = false;
                 
                 break;
 
@@ -136,6 +160,7 @@ public class StateManagerScript : MonoBehaviour
                 {
                     Answerbutton.GetComponent<Button>().interactable = false;
                 }
+             
 
                 break;
 
@@ -161,5 +186,7 @@ public class StateManagerScript : MonoBehaviour
             default:
                 break;
         }
+        
     }
+    
 }

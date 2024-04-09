@@ -8,15 +8,19 @@ public class SpawnEnemyAttack : MonoBehaviour
     public GameObject EnemyAttack2;
     public GameObject EnemyAttack3;
 
-   public void spawnattack1() { 
+   public void spawnattack1() 
+    {
+        Instantiate(EnemyAttack1, transform.position, Quaternion.identity);
 
     }
     public void spawnattack2()
     {
+        Instantiate(EnemyAttack2, transform.position, Quaternion.identity);
 
     }
     public void spawnattack3()
     {
+        Instantiate(EnemyAttack3, transform.position, Quaternion.identity);
 
     }
 
