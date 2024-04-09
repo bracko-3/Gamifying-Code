@@ -27,7 +27,7 @@ TagManager:
   - NameField
   - GameCode
   - AttackSpawner
-  - EnemyAttackeffectManager
+  - EnemyAttackEffectManager
   layers:
   - Default
   - TransparentFX
