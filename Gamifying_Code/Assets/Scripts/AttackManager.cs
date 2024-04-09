@@ -42,7 +42,7 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackLLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject2();
-            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+           
 
         }
         else
@@ -71,7 +71,7 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackMLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject();
-            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+            
 
         }
         else
@@ -101,7 +101,7 @@ public class AttackManager : MonoBehaviour
             quizManagerScript.IncrementAttacksLanded();
             quizManagerScript.attackHLanded();
             attacksapwner.GetComponent<AttacKSpawner>().SpawnAndMoveObject3();
-            StateManager.GetComponent<StateManagerScript>().enemyattack = true;
+          
 
 
         }
